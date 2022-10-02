@@ -1,0 +1,435 @@
+﻿<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gameBoard.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="gameBoard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="gameBoard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>518, 632</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gameBoard.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="gameBoard.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;gameBoard.Name" xml:space="preserve">
+    <value>gameBoard</value>
+  </data>
+  <data name="&gt;&gt;gameBoard.Type" xml:space="preserve">
+    <value>PilotsBrothersSafe.Controls.GameBoard, PilotsBrothersSafe, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gameBoard.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gameBoard.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="helpButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="helpButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="helpButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 36pt</value>
+  </data>
+  <data name="helpButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="helpButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 507</value>
+  </data>
+  <data name="helpButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>304, 88</value>
+  </data>
+  <data name="helpButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="helpButton.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="&gt;&gt;helpButton.Name" xml:space="preserve">
+    <value>helpButton</value>
+  </data>
+  <data name="&gt;&gt;helpButton.Type" xml:space="preserve">
+    <value>PilotsBrothersSafe.Controls.HelpButton, PilotsBrothersSafe, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;helpButton.Parent" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="&gt;&gt;helpButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="startButton.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="startButton.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="startButton.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 48pt</value>
+  </data>
+  <data name="startButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="startButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 381</value>
+  </data>
+  <data name="startButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>304, 120</value>
+  </data>
+  <data name="startButton.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="startButton.Text" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="&gt;&gt;startButton.Name" xml:space="preserve">
+    <value>startButton</value>
+  </data>
+  <data name="&gt;&gt;startButton.Type" xml:space="preserve">
+    <value>PilotsBrothersSafe.Controls.GameInterfaceButton, PilotsBrothersSafe, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;startButton.Parent" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="&gt;&gt;startButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="menuLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="mainMenu.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="dimensionsRow.ColumnCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="dimensionsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="dimensionsLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="dimensionsLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 36pt</value>
+  </data>
+  <data name="dimensionsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="dimensionsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 0</value>
+  </data>
+  <data name="dimensionsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>356, 152</value>
+  </data>
+  <data name="dimensionsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dimensionsLabel.Text" xml:space="preserve">
+    <value>Dimension size:</value>
+  </data>
+  <data name="dimensionsLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;dimensionsLabel.Name" xml:space="preserve">
+    <value>dimensionsLabel</value>
+  </data>
+  <data name="&gt;&gt;dimensionsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dimensionsLabel.Parent" xml:space="preserve">
+    <value>dimensionsRow</value>
+  </data>
+  <data name="&gt;&gt;dimensionsLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dimensionsNumericUpDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="dimensionsNumericUpDown.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="dimensionsNumericUpDown.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 27.75pt, style=Bold</value>
+  </data>
+  <data name="dimensionsNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>397, 47</value>
+  </data>
+  <data name="dimensionsNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 57</value>
+  </data>
+  <data name="dimensionsNumericUpDown.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="dimensionsNumericUpDown.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;dimensionsNumericUpDown.Name" xml:space="preserve">
+    <value>dimensionsNumericUpDown</value>
+  </data>
+  <data name="&gt;&gt;dimensionsNumericUpDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dimensionsNumericUpDown.Parent" xml:space="preserve">
+    <value>dimensionsRow</value>
+  </data>
+  <data name="&gt;&gt;dimensionsNumericUpDown.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dimensionsRow.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dimensionsRow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 223</value>
+  </data>
+  <data name="dimensionsRow.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="dimensionsRow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>512, 152</value>
+  </data>
+  <data name="dimensionsRow.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;dimensionsRow.Name" xml:space="preserve">
+    <value>dimensionsRow</value>
+  </data>
+  <data name="&gt;&gt;dimensionsRow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dimensionsRow.Parent" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="&gt;&gt;dimensionsRow.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dimensionsRow.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dimensionsLabel" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="dimensionsNumericUpDown" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,AutoSize,0,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="mainMenu.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="mainMenu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="mainMenu.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="mainMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>518, 632</value>
+  </data>
+  <data name="mainMenu.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;mainMenu.Name" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="&gt;&gt;mainMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mainMenu.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mainMenu.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="mainMenu.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="dimensionsRow" Row="1" RowSpan="1" Column="1" ColumnSpan="3" /&gt;&lt;Control Name="menuLabel" Row="1" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="startButton" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="helpButton" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,20,Percent,60,Percent,20" /&gt;&lt;Rows Styles="Percent,5,Percent,30,Percent,25,Percent,20,Percent,15,Percent,5,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="menuLabel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="menuLabel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Broadway, 96pt, style=Bold</value>
+  </data>
+  <data name="menuLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="menuLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 31</value>
+  </data>
+  <data name="menuLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>512, 189</value>
+  </data>
+  <data name="menuLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="menuLabel.Text" xml:space="preserve">
+    <value>MENU</value>
+  </data>
+  <data name="menuLabel.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;menuLabel.Name" xml:space="preserve">
+    <value>menuLabel</value>
+  </data>
+  <data name="&gt;&gt;menuLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuLabel.Parent" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="&gt;&gt;menuLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>518, 632</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAAAAAAAEAIABTEAAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAEAAAABAAgGAAAAXHKoZgAAAAlw
+        SFlzAAALEwAACxMBAJqcGAAAEAVJREFUeJztnWuMnFUdh/uBFoOJCkUotAgYlEupGgkGE5CYAPLBGMAI
+        YiKWSARF4IMmgIAF8ZPawvZCW8qdFkRQolwKCC3l1iuFwu7O9MbOLHzh0pnZ3ba03bbH8592k7V0uzNz
+        ZuZ3zuzzJE9oWtqd93fe/5nznve85x01CgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFqC9q4Px2W6Cj/L5ott2Vzhee/6bL5Q8O7wv+cQddo5
+        6M9FOyft3PTnaGf3pkvtnFXXTdJ0ftAzNpMrXOtDXalvZMTq9efvCu81di6r6ykZ1r3/yYRsrnind4u6
+        ARHrYq642XcEd6zt/mS8ur6iZdUqNzqTL1znw+qTNxhiI/Rfapl88dZ169zB6nqLisx7PSf6YN6WNxBi
+        E/RfdG/5y4Kvq+suCjK54o/51scRaO/aruKF6vqT4r/1J2dzhf4IGgOx6WZyhZ2Z/Kar1HUoIZMvXalu
+        AMQYtDsF6npsKjbst95PHTxiDJZrobt4gboum0J7d+kEP/TvUYeOGJU2D9b18Unq+mwo7e1uDLP9iPs3
+        ky+sttvh6jptGNl84QZ1yIgx6y+Pf6+u04Zgq6BsRZQ6YMSo9ZcCnbmPjlLXa90pL+9Vh4uYgJlcYaq6
+        XuuKPQzB2n7ECvUj5ZZ6gKj8VJ86VMSUzBWuVtdt3eCRXsTq9F+ay9V1WxdsQsMfzG51oIgpaTXzzsa+
+        I9X1G8zenXzkgSKmZ+kSdf0Gk7VtvORBIqanbSKirt9g9u6TJg8TMTUz+eKz6voNJpMvbFQHiZikucJ6
+        df0G4w9ikzxIxAT1lwAfq+s3mGy+sF0dJGKK+tHzNnX9BqMOETFl1fUbjDpAxJRV128w6gARU1Zdv8Go
+        A0RMWXX9BqMOEDFl1fUbjDpAxJRV128w6gARU1Zdv8GoA0RMWXX9BqMOEDFl1fUbjDpAxJRV128w6gAR
+        U1Zdv8GoA0RMWXX9BqMOEDFl1fUbjDpAxJRV128w6gARU1Zdv8GoA0RMWXX9BqMOUOnr60vu3pV97pbF
+        W93Pn97mznq0353y4E53/L273Ng5u90hs1xZ+7X9nv3Z9/7eX/5///jyVnef/7tvrCvJjwN1qus3GHWA
+        zfTt90pu9vLNbvIz28rFPGaGc6MDtX9jov+3Lvf/5hz/b9vPUB8nNk91/QajDrDRduaK7pG3+tyl/9nu
+        Dp29O7jgh9N+xkVPbndzfWfQkdMfPzZWdf0Gow6wUa7pKrpb/TD9OD90b3TRD6VdNty2ZKt7p0ufBzZG
+        df0Gow6w3toQ/IZFW93R83SFv6/2WW70n4nLg9ZTXb/BqAOspzbsPlb4jT+cE+7Z5WYs3SzPCeunun6D
+        UQdYDxdletw5/9ghL/BKPffxHe7lbI88NwxXXb/BqAMM9a5lm8u36dRFXa02WdjGaCB51fUbjDrAWrWJ
+        Nbudpy7kUO3uxEiYJLRJ2ftX9bmrFm5zZzzS77563y73Bd8JmvZr+71fP/dp+f9JKQ91/QajDrAWl60v
+        udPm98uLt15+Z0G/W76+NScIbbHVdS986sbNrXyUNu7u3e5a/3dSWGSlrt9g1AFW66tre8qLeNRFW29P
+        vH9nS80LZLx/eW1L0OWZXSbdvHhreS2H+niGUl2/wagDrMaFHb3umHvineUP1Y7tuY70O4GVG0vu7Mfq
+        N0L7/mM73KqNcY4G1PUbjDrASn3Ff/N/pYWLf8Dx83a5xQmPBF5b1+O+8VD9R2gn+1Gfjf7Ux0cHINCu
+        +W2IrC7OZnnSAzuTnBNY7b+lT27g5Zk9c/FWZCMBdf0Gow5wOG1GuJUm/Cr19AX9Sc2G2zX/D//Z+LUY
+        5z+xo/yz1MdLB9AkL3sq/Vt9tWq3OdX5V+pfX9/StFymvbFFfrx0AE3Qls2qi1DtrGXxLxayZxyaOTlr
+        S6pjea5CXb/BqAMcSlvee1gTHt+NXbuNFvuk4B8WbW16LraJi/q46QAa6DmPp7O2v9Ge57NQt8eBnCRY
+        l2F3GtTHTQfQIG19v7roYtOedFS3y/58pr1Xlon9bPXxq+s3GHWA+2rXdiPhfn+12sYmsVz3DtY2XVFl
+        8qcl+ssAdf0Gow5wX69/SXdCxe5NkVz3DtYeZlLlYZuzqo9fXb/BqAMcrN33jmknn9i0bNZEtjbgu4/q
+        1mic6X+2+vjV9RuMOsDBKoeTqXj7knjugZvfnq9boWmLpdTHr67fYNQBDmhPfCk38ExFe3Y+ppVw33xY
+        1wGcNl9/J0Bdv8GoAxzwoTf75MWVivNX98nba8AzhZcA9pIW9fGr6zcYdYAD/uTfusmk1Pypz0rdXgMq
+        JwFtmbj6+NX1G4w6QNNub7Hqr3Jto4xYbgnahh2qHKZwGzAcdYCmva5LXVSpOXdFHAuDXujokWXwYka/
+        RFpdv8GoAzRbYXPPZnvFs/rh74CN3ANgKE99UD8BSAdQJ1txj79GOymSAjCnCG7f3hbB8J8OoA7arrH1
+        eEvvSPPgmc4tjWTXIFvANaGJy7ft0eNYNktR128w6gDvXcntv1q1PfTV7TdgMzcEueP1eBZDqes3GHWA
+        twhnkVM3hlnwwV7wZONvCdqr19XHSQdQR+2BDnUhpeovIngYZrC2HfipDZzPsXmP2LYHV9dvMOoAbTWX
+        upBS1fbeV7ffvq7YUHLfasDyYCv+ZZHMedAB1FHFLaRWcWJEdwIGa1uan1fHHZ1+8MSOcseiPi46gAbI
+        5h+1aw9PqdvvQNqTi6HHGNvTj3QAdfbwKl4aif/vET47dfsNZ+gxqj8/HUCDPWSWvpBS9fOz4i8QOoDI
+        UQdIB0AHQAcgRB0glwC1yyWAXnX9BqMOkEnA2o19EpAOIAHUAXIbsHZjvQ1IB5AQ6gBZCFS7MS4EogNI
+        DHWALAWu3diWAtMBJIg6QB4Gqt3YHgaiA0gQdYA8Dly7MT0OTAeQKOoA31jHhiC1aBuCxPhwDB1AYqgD
+        NNkSrHpjeT02HUDiqAM0L2dT0KqNaVNQOoCEUQdozmFb8Kq9e2Uc24LTASSOOkCTF4NU52ERvRiEDiBx
+        1AEOeDGvBqtYex2Xur3oAOgA6urDq7kdWKkLIno5KB1A4qgDHNBeD348rwcf1theD04HkDjqAAdrb3tR
+        F1js/vmVuLfIogNIDHWAg7W3vRw9j1HAUE6I6I04dAB0AA3xxkWMAobSnptQtw8dAB1AQ7XbW8cyF/AZ
+        7dp/TWLf/nQACaAOcH/OW8nCoH2duyKNhT90AImhDnAoz63jiyVS93yfhbo96ADoAJrqy9keN3YOqwMt
+        A8tC3R50AHQATdeGvSP5UWE79lnL0xz60wEkgjrA4Zw8gp8U/GUiT/wdyC8FPONx6Oz4tz1X128w6gCH
+        0+57n75g5G0cesYj/e7dBGf99/WkB2rf6+HkBHY9VtdvMOoAK7HR752PTSua5Qns9lOJIXs9pLDngbp+
+        g1EHWKmvrO0ZES8RsdV+KU/67evT7/a6z82sPgf7O8+098o//3Cq6zcYdYDV+FxHjzumhTsBO7bnO1qn
+        +Ae87KnqRwE296P+3JWort9g1AFW66t+JDCxBS8HbNjfSt/8g7W5jLMerXwex14W057Tf+5KVNdvMOoA
+        a9Guj1tpYtAm/FZsaI1r/qG0TuCyp7cd8HLA/sy++VMpflNdv8GoA6zVDn9CXbVwW9LrBOyz2wnfCrP9
+        lWrX9XZ702b4vzh7d1n7tU34pXDNv6/q+g1GHWCos5dvTnLFoN3jnr407UU+SAcQhYv9tXNKzw7Y2v5W
+        vd4faarrNxh1gPXUlg4fF/GjxLblWapP9eH+VddvMOoA663tJ3DT4q1ufEQ7C9m9/Zv9Z0rxeX48sOr6
+        DUYdYKO0JcS3L9lS3khDVfj2s20Pv5E0yTfSVNdvMOoAm+G/1vSWZ9u/PLfxk4X20o6LntxefnNvSrv3
+        Ym2q6zcYdYDN1Ibgdg1ut6EmPbiz/Ibd0IK3f8Ne1Gm3sex1XQzzR5bq+g1GHaDSpetL5W/qKUu2lhep
+        2Ao0e+jIJusO96OFQ2a5svZr+z37s7Mf6y//v/Z37O+m8IpubJzq+g1GHSBiyqrrNxh1gIgpq67fYNQB
+        Iqasun6DUQeImLLq+g1GHSBiyqrrNxh1gIgpq67fYNQBIqasun6DUQeImLLq+g1GHSBiyqrrNxh1gIgp
+        q67fYNQBIqasun6DUQeImLLq+g1GHSBiyqrrNxh1gIgpq67fYNQBIqasun6DUQeImLLq+g0mmy9sV4eI
+        mKKZfGGbun6DyeYKm9RBIqZoJlf4WF2/wfiD2KAOEjFJc4X16voNxh/E8/IgERM0ky8+q67fYPyBtKmD
+        RExRP3q+Q12/wXR2b7pUHSRimpYuVtdvMO9s7DvS92S79WEipqPVjNWOun7rgj+YFepAERNzqbpu64bv
+        AK6JIFDEdOwu/EZdt3Wj84OesdlccbM8VMQU9LViNaOu27piM5ryYBGTsPA3db3WnbXdn4xnFIA4rL3t
+        XR+OU9drQ8jmS9dHEDBitGa6ir9T12nDWLXKjc7kC6vVISPGaeFNqxF1nTaU9u7SCZl8sUcfNmJE5op9
+        mfd6TlTXZ1NY21W8MJMr7JSHjhiBVgt+ZPwjdV02lUy+9Ct18Ihqy6tkc8Ur1PUowV8KTM7mCv3qRkBU
+        uOebv3Slug6lZLuLF/gwetWNgdhMbR5sxA37h6Lj/Z6vcXcAR46FN20yXF13UbHYuYN8J3BdltEAtqq5
+        4hb/zX9re7sbo663aOnMfXSUvzaaxqpBbBn9uezP6aktu8KvEdjDEJ25wm99cMvYTwBTc+85uzSbK1zt
+        h/uHqespaTZs6Dsimy9dYg8UZXLFhf4aKrtnt2G2HEe1/hzccy5m7dzc89Bb6RI7Z9V1AwAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQBaNnuEnetoOmu3b/381eJ3Zz+bNMd3eOvtOdqs4ndmg/qI02
+        d7BvpLt8g+2K4KTZv9PdTu/MUVPYFPIz0H5QM3byzHCL5CdI5b7ESTQI2g9C8L3y7AhOimqdoc4tFmg/
+        qJnRe64Z4x02DqUNJ2e6ier81NB+EIRvjDb5yVC709T5qaH9IIiDZriOCE6EmvSf/V11fmpoPwjCD8X6
+        1CdCgL3q/NTQfhCENUIEJ0Kt9qjzU0P7QRAMIdOG9oMgyiu0IjgZanK6m6rOTw3tB0HY8szyLRn1yVD9
+        ybNzTJs7RZ2fGtoPgrHlmfITonrb1LnFAu0HYUxxY/xJ9GIEJ0Wl/nfUXDdaHVs00H4QjJ1EM9yMqIeT
+        ez5bGyfPfqD9oB7Y8kzfSNNshjaKe8z+M+z9LFO5Zhwe2g8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABi439k7gUmARTOygAAAABJRU5ErkJg
+        gg==
+</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>534, 671</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Pilots Brothers' Safe</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>GameForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>
