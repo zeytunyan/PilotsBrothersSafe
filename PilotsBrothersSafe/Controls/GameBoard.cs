@@ -18,7 +18,7 @@ namespace PilotsBrothersSafe.Controls
     {
         private GameForm gameForm;
 
-        public enum BoardState
+        internal enum BoardState
         {
             Default,
             GameStarted,
@@ -34,13 +34,13 @@ namespace PilotsBrothersSafe.Controls
 
         private Game? game;
 
-        public int N = 4;
+        internal int N = 4, M = 4; 
 
         private List<Handle> preparedHandles = new();
 
         private Timer victoryTimer = new();
 
-        public GameBoard()
+        internal GameBoard()
         {
             InitializeComponent();
             Dock = DockStyle.Fill;
@@ -59,7 +59,7 @@ namespace PilotsBrothersSafe.Controls
 
         private BoardState state = BoardState.Default;
 
-        public BoardState State {
+        internal BoardState State {
             
             get => state;
             
@@ -103,7 +103,7 @@ namespace PilotsBrothersSafe.Controls
         private void SetGameStartedState()
         {
             IsSolutionShown = false;
-            game = new Game(N);
+            game = new Game(M, N);
             numberOfMovesLabel.Text = OnGoingGameMessage;
             safe.IsOpen = false;
             safe.Hide();
@@ -154,9 +154,9 @@ namespace PilotsBrothersSafe.Controls
             safe.ClearDimensions();
         }
 
-        public void AddHandlesToSafe()
+        internal void AddHandlesToSafe()
         {
-            safe.SetDimensions(N, N);
+            safe.SetDimensions(M, N);
             FillWithHandles();
         }
 
@@ -164,7 +164,7 @@ namespace PilotsBrothersSafe.Controls
         {
             ThrowIfGameNull();
 
-            bool notEnoughPreparedHandles = preparedHandles.Count < N * N;
+            bool notEnoughPreparedHandles = preparedHandles.Count < M * N;
 
             int index = 0;
             foreach (bool position in game.Configuration)
@@ -181,7 +181,7 @@ namespace PilotsBrothersSafe.Controls
             }    
         }
 
-        public void PrepareHandles(int numberOfHandles)
+        internal void PrepareHandles(int numberOfHandles)
         {
             for (int i = 0; i < numberOfHandles; i++)
                 preparedHandles.Add(CreateHandleWithEvents());

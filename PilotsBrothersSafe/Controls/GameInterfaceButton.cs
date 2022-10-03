@@ -12,7 +12,7 @@ namespace PilotsBrothersSafe.Controls
 {
     public partial class GameInterfaceButton : Button
     {
-        public GameInterfaceButton()
+        internal GameInterfaceButton()
         {
             InitializeComponent();
             BackColor = SystemColors.ButtonFace;

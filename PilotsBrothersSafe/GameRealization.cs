@@ -11,17 +11,17 @@ namespace PilotsBrothersSafe
     {
         Random rnd = new();
 
-        public readonly int m, n, mn, mnHalf;
+        internal readonly int m, n, mn, mnHalf;
 
-        public readonly bool[,] configuration;
+        internal readonly bool[,] configuration;
 
-        public readonly bool[,] solution;
+        internal readonly bool[,] solution;
 
-        public bool victory = false;
+        internal bool victory = false;
 
-        public GameRealization(int n) : this(n, n) { }
+        internal GameRealization(int n) : this(n, n) { }
 
-        public GameRealization(int m, int n)
+        internal GameRealization(int m, int n)
         {
             if (m < 3 || n < 3)
             {
@@ -37,6 +37,10 @@ namespace PilotsBrothersSafe
             configuration = new bool[m, n];
             MakeRandomConfiguration();
         }
+
+
+
+
 
         private void MakeRandomConfiguration()
         {
@@ -89,7 +93,10 @@ namespace PilotsBrothersSafe
             return true;
         }
 
-        public void Move(int rowIndex, int columnIndex)
+
+
+
+        internal void Move(int rowIndex, int columnIndex)
         {
             InvertRowColumn(rowIndex, columnIndex, configuration);
             ChangeSolution(rowIndex, columnIndex);
@@ -98,13 +105,13 @@ namespace PilotsBrothersSafe
 
         private void SetVictory()
         {
-            int numberOfVertical = 0;
-
-            foreach (bool handle in configuration)
-                if (handle) numberOfVertical++;
-
+            int numberOfVertical = ArraySum(configuration);
             victory = numberOfVertical == 0 || numberOfVertical == mn;
         }
+
+
+
+
 
         //!!!
         private void ChangeSolution(int rowIndex, int columnIndex)
@@ -137,6 +144,9 @@ namespace PilotsBrothersSafe
                     InvertColumn(columnIndex, solution);
             }
         }
+
+
+
 
 
         private void InvertRow(int rowIndex, bool[,] invertibleArray)

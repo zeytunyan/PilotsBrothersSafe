@@ -16,7 +16,7 @@ namespace PilotsBrothersSafe.Controls
     {
         private bool isVertical;
 
-        public bool IsVertical
+        internal bool IsVertical
         {
             get => isVertical;
 
@@ -30,7 +30,7 @@ namespace PilotsBrothersSafe.Controls
             }
         }
 
-        public enum States
+        internal enum States
         {
             Default,
             PaintedOver,
@@ -40,7 +40,7 @@ namespace PilotsBrothersSafe.Controls
 
         private States state = States.Default;
 
-        public States State 
+        internal States State 
         {
             get => state;
 
@@ -62,9 +62,9 @@ namespace PilotsBrothersSafe.Controls
             }
         }
 
-        public Handle() : this(false) { }
+        internal Handle() : this(false) { }
 
-        public Handle(bool position)
+        internal Handle(bool position)
         {
             InitializeComponent();
             Cursor = Cursors.Hand;

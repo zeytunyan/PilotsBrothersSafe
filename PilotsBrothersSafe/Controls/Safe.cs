@@ -14,7 +14,7 @@ namespace PilotsBrothersSafe.Controls
     {
         private bool isOpen = false;
 
-        public bool IsOpen
+        internal bool IsOpen
         {
             get => isOpen;
 
@@ -33,15 +33,15 @@ namespace PilotsBrothersSafe.Controls
             }
         }
 
-        public bool IsWide => Width > Height;
+        internal bool IsWide => Width > Height;
 
-        public int SmallestDimension =>
+        internal int SmallestDimension =>
             IsWide ? Height : Width;
 
-        public int BiggestDimension =>
+        internal int BiggestDimension =>
             IsWide ? Width : Height;
 
-        public Safe()
+        internal Safe()
         {
             InitializeComponent();
             IsOpen = false;
@@ -97,7 +97,7 @@ namespace PilotsBrothersSafe.Controls
             };
         }
 
-        public void ClearDimensions() 
+        internal void ClearDimensions() 
         {
             tableWithHandles.RowCount = 0;
             tableWithHandles.ColumnCount = 0;
@@ -105,7 +105,7 @@ namespace PilotsBrothersSafe.Controls
             tableWithHandles.ColumnStyles.Clear();
         }
 
-        public void SetDimensions(int m, int n)
+        internal void SetDimensions(int m, int n)
         {
             tableWithHandles.RowCount = m;
             tableWithHandles.ColumnCount = n;
@@ -128,12 +128,12 @@ namespace PilotsBrothersSafe.Controls
             SetSizeForTableWithHandles();
         }
 
-        public TableLayoutPanelCellPosition FindHandle(Handle handle) =>
+        internal TableLayoutPanelCellPosition FindHandle(Handle handle) =>
             tableWithHandles.GetCellPosition(handle);
 
-        public void ClearHandles() => tableWithHandles.Controls.Clear();
+        internal void ClearHandles() => tableWithHandles.Controls.Clear();
 
-        public Handle this[int indexOfHandle]
+        internal Handle this[int indexOfHandle]
         {
             get => (Handle)tableWithHandles.Controls[indexOfHandle];
 

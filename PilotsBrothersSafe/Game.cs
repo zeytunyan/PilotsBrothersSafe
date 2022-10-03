@@ -9,23 +9,23 @@ namespace PilotsBrothersSafe
 {
     internal class Game
     {
-        public readonly int m, n;
+        internal readonly int m, n;
 
         private GameRealization gameRealization;
 
-        public readonly List<int>[,] moves;
+        internal readonly List<int>[,] moves;
 
-        public int NumberOfMoves { get; private set; } = 0;
+        internal int NumberOfMoves { get; private set; } = 0;
 
-        public bool[,] Configuration => gameRealization.configuration;
+        internal bool[,] Configuration => gameRealization.configuration;
 
-        public List<int> Solution { get; private set; }
-        
-        public bool Victory => gameRealization.victory;
+        internal List<int> Solution { get; private set; }
 
-        public Game(int n) : this(n, n) { }
+        internal bool Victory => gameRealization.victory;
 
-        public Game(int m, int n)
+        internal Game(int n) : this(n, n) { }
+
+        internal Game(int m, int n)
         {
             if (m < 3 || n < 3)
             {
@@ -61,7 +61,7 @@ namespace PilotsBrothersSafe
             return move;
         }
 
-        public void Move(int rowIndex, int columnIndex)
+        internal void Move(int rowIndex, int columnIndex)
         {
             NumberOfMoves++;
             gameRealization.Move(rowIndex, columnIndex);

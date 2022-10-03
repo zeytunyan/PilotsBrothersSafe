@@ -12,7 +12,7 @@ namespace PilotsBrothersSafe.Controls
 {
     public partial class HelpButton : GameInterfaceButton
     {
-        public HelpButton()
+        internal HelpButton()
         {
             InitializeComponent();
             Click += helpButton_Click;
@@ -21,7 +21,7 @@ namespace PilotsBrothersSafe.Controls
         private void helpButton_Click(object sender, EventArgs e) =>
             ShowHelp();
 
-        private void ShowHelp()
+        internal void ShowHelp()
         {
             string helpInformation = @"There are a lot of handles on the safe, arranged in a square, like a 2-dimensional array NxN.
 

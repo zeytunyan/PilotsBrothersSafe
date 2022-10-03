@@ -28,7 +28,9 @@ namespace PilotsBrothersSafe
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            gameBoard.N = Convert.ToInt32(dimensionsNumericUpDown.Value);
+            int dimensionSize = Convert.ToInt32(dimensionsNumericUpDown.Value);
+            gameBoard.M = dimensionSize;
+            gameBoard.N = dimensionSize;
             gameBoard.State = GameBoard.BoardState.GameStarted;
             mainMenu.Hide();
             gameBoard.Show();
@@ -40,7 +42,7 @@ namespace PilotsBrothersSafe
             e.Cancel = exitAskResult == DialogResult.No;
         }
 
-        public DialogResult AskAttentionQuestion(string actionAskAbout, string caption)
+        internal DialogResult AskAttentionQuestion(string actionAskAbout, string caption)
         {
             string message = $"Are you sure you want to {actionAskAbout}?";
 
