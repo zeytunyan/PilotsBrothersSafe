@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+
 
 namespace PilotsBrothersSafe
 {
@@ -16,11 +18,6 @@ namespace PilotsBrothersSafe
         public GameForm()
         {
             InitializeComponent();
-
-            CancelButton = (Button)gameBoard
-                .Controls["gameBoardTable"]
-                .Controls["gameControls"]
-                .Controls["backToMenuButton"];
         }
 
         private void GameForm_Load(object sender, EventArgs e)
@@ -39,20 +36,26 @@ namespace PilotsBrothersSafe
 
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string closingMessage = "Are you sure you want to exit?";
+            DialogResult exitAskResult = AskAttentionQuestion("exit", "Exit");
+            e.Cancel = exitAskResult == DialogResult.No;
+        }
+
+        public DialogResult AskAttentionQuestion(string actionAskAbout, string caption)
+        {
+            string message = $"Are you sure you want to {actionAskAbout}?";
 
             if (gameBoard.State == GameBoard.BoardState.GameStarted)
-                closingMessage += "\r\nAll game progress will be lost.";
+                message += "\r\nAll game progress will be lost.";
 
-            DialogResult exitBoxResult = MessageBox.Show(
-                closingMessage,
-                "Exit",
+            DialogResult askResult = MessageBox.Show(
+                message,
+                caption,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,
                 MessageBoxDefaultButton.Button2
             );
 
-            e.Cancel = exitBoxResult == DialogResult.No;
-        }
+            return askResult;
+        } 
     }
 }

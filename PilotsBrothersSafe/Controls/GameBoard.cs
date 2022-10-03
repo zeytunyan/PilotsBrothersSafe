@@ -16,6 +16,8 @@ namespace PilotsBrothersSafe.Controls
 {
     public partial class GameBoard : UserControl
     {
+        private GameForm gameForm;
+
         public enum BoardState
         {
             Default,
@@ -43,11 +45,17 @@ namespace PilotsBrothersSafe.Controls
             InitializeComponent();
             Dock = DockStyle.Fill;
             victoryTimer.Interval = 750;
-            victoryTimer.Tick += victoryTimer_Tick;
+            victoryTimer.Tick += victoryTimer_Tick; 
         }
 
         private void victoryTimer_Tick(object sender, EventArgs e) =>
             State = BoardState.Victory;
+
+        private void GameBoard_Load(object sender, EventArgs e)
+        {
+            gameForm = (GameForm)FindForm();
+            gameForm.CancelButton = backToMenuButton;
+        }
 
         private BoardState state = BoardState.Default;
 
@@ -119,11 +127,11 @@ namespace PilotsBrothersSafe.Controls
 
                 isSolutionShown = value;
 
-                ResumeOrPauseSolutionShowing(isSolutionShown);
+                ResumeOrPauseSolutionShowing();
             }
         }
 
-        private void ResumeOrPauseSolutionShowing(bool resumeOrPause)
+        private void ResumeOrPauseSolutionShowing()
         {
             ThrowIfGameNull();
 
@@ -148,34 +156,29 @@ namespace PilotsBrothersSafe.Controls
 
         public void AddHandlesToSafe()
         {
-            safe.SetDimensions(N, N); 
-
-            if (preparedHandles.Count < N * N)
-                AddNewHandles();
-            else
-                AddPreparedHandles();
+            safe.SetDimensions(N, N);
+            FillWithHandles();
         }
 
-        private void AddNewHandles()
+        private void FillWithHandles()
         {
             ThrowIfGameNull();
 
-            int index = 0;
-            foreach (bool position in game.configuration)
-                safe[index++] = CreateHandleWithEvents(position);
-        }
-
-        private void AddPreparedHandles()
-        {
-            ThrowIfGameNull();
+            bool notEnoughPreparedHandles = preparedHandles.Count < N * N;
 
             int index = 0;
-            foreach (bool position in game.configuration)
+            foreach (bool position in game.Configuration)
             {
+                if (notEnoughPreparedHandles)
+                {
+                    safe[index++] = CreateHandleWithEvents(position);
+                    continue;
+                }
+
                 preparedHandles[index].IsVertical = position;
                 safe[index] = preparedHandles[index];
                 index++;
-            }
+            }    
         }
 
         public void PrepareHandles(int numberOfHandles)
@@ -243,13 +246,14 @@ namespace PilotsBrothersSafe.Controls
         {
             ThrowIfGameNull();
 
-            if (IsSolutionShown) ResumeOrPauseSolutionShowing(false);
+            if (IsSolutionShown) ResumeOrPauseSolutionShowing();
             game.Move(handleRow, handleColumn);
-            if (IsSolutionShown) ResumeOrPauseSolutionShowing(true);
+            if (IsSolutionShown) ResumeOrPauseSolutionShowing();
 
             numberOfMovesLabel.Text = OnGoingGameMessage;
 
-            if (game.Victory) ShowVictory();
+            if (game.Victory) 
+                ShowVictory();
         }
 
         private void ShowVictory()
@@ -261,24 +265,16 @@ namespace PilotsBrothersSafe.Controls
 
         private void backToMenuButton_Click(object sender, EventArgs e)
         {
-            string toMenuMessage = "Are you sure you want to go to the menu?";
-                
-            if (State == BoardState.GameStarted)
-                toMenuMessage += "\r\nAll game progress will be lost.";
+            DialogResult toMenuAskResult = gameForm.AskAttentionQuestion(
+                "go to the menu",
+                "Back to menu");
 
-            DialogResult toMenuBoxResult = MessageBox.Show(
-                toMenuMessage, 
-                "Back to menu",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button2
-            );
-
-            if (toMenuBoxResult == DialogResult.No) return;
+            if (toMenuAskResult == DialogResult.No)
+                return;
 
             State = BoardState.Default;
             Hide();
-            Parent.Controls["mainMenu"].Show();
+            gameForm.Controls["mainMenu"].Show();
         }
 
         private void solveButton_Click(object sender, EventArgs e) =>
@@ -286,25 +282,10 @@ namespace PilotsBrothersSafe.Controls
 
         private void restartButton_Click(object sender, EventArgs e)
         {
-            if (State != BoardState.GameStarted)
-            {
-                State = BoardState.GameStarted;
-                return;
-            }
+            bool condition = State != BoardState.GameStarted ||
+                gameForm.AskAttentionQuestion("restart", "Restart") == DialogResult.Yes;
 
-            string restartMessage =
-                "Are you sure you want to restart?" +
-                "\r\nAll game progress will be lost.";
-
-            DialogResult restartBoxResult = MessageBox.Show(
-                restartMessage,
-                "Restart",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button2
-            );
-
-            if (restartBoxResult == DialogResult.Yes)
+            if (condition)
                 State = BoardState.GameStarted;
         }
 

@@ -76,7 +76,7 @@
             this.gameControls.RowCount = 1;
             this.gameControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.gameControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.gameControls.Size = new System.Drawing.Size(506, 56);
+            this.gameControls.Size = new System.Drawing.Size(512, 57);
             this.gameControls.TabIndex = 1;
             // 
             // backToMenuButton
@@ -88,7 +88,7 @@
             this.backToMenuButton.ForeColor = System.Drawing.Color.RoyalBlue;
             this.backToMenuButton.Location = new System.Drawing.Point(3, 3);
             this.backToMenuButton.Name = "backToMenuButton";
-            this.backToMenuButton.Size = new System.Drawing.Size(120, 50);
+            this.backToMenuButton.Size = new System.Drawing.Size(122, 51);
             this.backToMenuButton.TabIndex = 0;
             this.backToMenuButton.Text = "🠔Menu";
             this.backToMenuButton.UseVisualStyleBackColor = false;
@@ -101,9 +101,9 @@
             this.restartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.restartButton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.restartButton.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.restartButton.Location = new System.Drawing.Point(255, 3);
+            this.restartButton.Location = new System.Drawing.Point(259, 3);
             this.restartButton.Name = "restartButton";
-            this.restartButton.Size = new System.Drawing.Size(120, 50);
+            this.restartButton.Size = new System.Drawing.Size(122, 51);
             this.restartButton.TabIndex = 2;
             this.restartButton.Text = "Restart";
             this.restartButton.UseVisualStyleBackColor = false;
@@ -116,9 +116,9 @@
             this.solveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.solveButton.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.solveButton.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.solveButton.Location = new System.Drawing.Point(129, 3);
+            this.solveButton.Location = new System.Drawing.Point(131, 3);
             this.solveButton.Name = "solveButton";
-            this.solveButton.Size = new System.Drawing.Size(120, 50);
+            this.solveButton.Size = new System.Drawing.Size(122, 51);
             this.solveButton.TabIndex = 1;
             this.solveButton.Text = "Solve";
             this.solveButton.UseVisualStyleBackColor = false;
@@ -131,9 +131,9 @@
             this.helpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.helpButton.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.helpButton.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.helpButton.Location = new System.Drawing.Point(381, 3);
+            this.helpButton.Location = new System.Drawing.Point(387, 3);
             this.helpButton.Name = "helpButton";
-            this.helpButton.Size = new System.Drawing.Size(122, 50);
+            this.helpButton.Size = new System.Drawing.Size(122, 51);
             this.helpButton.TabIndex = 3;
             this.helpButton.Text = "Help";
             this.helpButton.UseVisualStyleBackColor = false;
@@ -144,9 +144,9 @@
             this.numberOfMovesLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numberOfMovesLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.numberOfMovesLabel.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.numberOfMovesLabel.Location = new System.Drawing.Point(3, 62);
+            this.numberOfMovesLabel.Location = new System.Drawing.Point(3, 63);
             this.numberOfMovesLabel.Name = "numberOfMovesLabel";
-            this.numberOfMovesLabel.Size = new System.Drawing.Size(506, 50);
+            this.numberOfMovesLabel.Size = new System.Drawing.Size(512, 50);
             this.numberOfMovesLabel.TabIndex = 2;
             this.numberOfMovesLabel.Text = "Number of moves: 0";
             this.numberOfMovesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -158,9 +158,9 @@
             this.safe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.safe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.safe.IsOpen = false;
-            this.safe.Location = new System.Drawing.Point(3, 115);
+            this.safe.Location = new System.Drawing.Point(3, 116);
             this.safe.Name = "safe";
-            this.safe.Size = new System.Drawing.Size(506, 507);
+            this.safe.Size = new System.Drawing.Size(512, 513);
             this.safe.TabIndex = 4;
             // 
             // GameBoard
@@ -172,6 +172,7 @@
             this.DoubleBuffered = true;
             this.Name = "GameBoard";
             this.Size = new System.Drawing.Size(518, 632);
+            this.Load += new System.EventHandler(this.GameBoard_Load);
             this.gameBoardTable.ResumeLayout(false);
             this.gameBoardTable.PerformLayout();
             this.gameControls.ResumeLayout(false);

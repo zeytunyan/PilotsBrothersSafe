@@ -62,47 +62,6 @@ namespace PilotsBrothersSafe.Controls
             }
         }
 
-        //private bool isHighlighted = false;
-
-        //public bool IsHighlighted
-        //{
-        //    get => isHighlighted;
-
-        //    set
-        //    {
-        //        isHighlighted = value;
-
-        //        BackColor = isHighlighted ?
-        //            Color.FromArgb(76, 99, 107) :
-        //            Color.Transparent;
-        //    }
-        //}
-
-        //private bool isSelected = false;
-
-        //public bool IsSelected
-        //{
-        //    get => isSelected;
-
-        //    set
-        //    {
-        //        if (isSelected == value)
-        //            return;
-
-        //        isSelected = value;
-
-        //        if (!isSelected)
-        //        {
-        //            IsHighlighted = isHighlighted;
-        //            return;
-        //        }
-
-        //        BackColor = isHighlighted ?
-        //            Color.Gray:
-        //            Color.FromArgb(192, 255, 255);
-        //    }
-        //}
-
         public Handle() : this(false) { }
 
         public Handle(bool position)
@@ -116,11 +75,6 @@ namespace PilotsBrothersSafe.Controls
             SizeMode = PictureBoxSizeMode.StretchImage;
             BackColor = Color.Transparent;
             IsVertical = position;
-        }
-
-        public void Switch()
-        {
-            IsVertical = !IsVertical;  
         }
 
         protected override void OnPaint(PaintEventArgs pe)
