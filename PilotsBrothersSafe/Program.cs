@@ -22,6 +22,5 @@ namespace PilotsBrothersSafe
                 throw new ArgumentOutOfRangeException(errorMessage);
             }
         }
-
     }
 }

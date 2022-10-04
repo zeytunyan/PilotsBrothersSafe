@@ -23,11 +23,7 @@ namespace PilotsBrothersSafe
 
         internal GameRealization(int m, int n)
         {
-            if (m < 2 || n < 2)
-            {
-                string errorMessage = "Переданные аргументы недопустимо малы";
-                throw new ArgumentOutOfRangeException(errorMessage);
-            }
+            Program.CheckMNArguments(m, n);
 
             this.m = m;
             this.n = n;
