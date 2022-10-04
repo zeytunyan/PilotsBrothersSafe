@@ -34,10 +34,6 @@ namespace PilotsBrothersSafe
             MakeRandomConfiguration();
         }
 
-
-
-
-
         private void MakeRandomConfiguration()
         {
             MakeRandomSolution();
@@ -47,6 +43,9 @@ namespace PilotsBrothersSafe
                     if (solution[rowIndex, columnIndex])
                         InvertRowColumn(rowIndex, columnIndex, configuration);
         }
+
+
+
 
         private void MakeRandomSolution()
         {
@@ -59,7 +58,7 @@ namespace PilotsBrothersSafe
                 int rowIndex = rndMove / n;
                 int columnIndex = rndMove % n;
 
-                if (!isGoodMove(rowIndex, columnIndex, rndNumberOfMoves))
+                if (!IsGoodMove(rowIndex, columnIndex, rndNumberOfMoves))
                     continue;
 
                 solution[rowIndex, columnIndex] = true;
@@ -70,7 +69,7 @@ namespace PilotsBrothersSafe
             }
         }
 
-        private bool isGoodMove(int rowIndex, int columnIndex, int numberOfMoves)
+        private bool IsGoodMove(int rowIndex, int columnIndex, int numberOfMoves)
         {
             int rowSum = RowSum(rowIndex, solution);
             int columnSum = ColumnSum(columnIndex, solution);
@@ -91,7 +90,7 @@ namespace PilotsBrothersSafe
 
 
 
-
+        // Добавить проверку на правильность аргументов
         internal void Move(int rowIndex, int columnIndex)
         {
             InvertRowColumn(rowIndex, columnIndex, configuration);
