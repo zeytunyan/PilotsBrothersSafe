@@ -13,5 +13,15 @@ namespace PilotsBrothersSafe
             ApplicationConfiguration.Initialize();
             Application.Run(new GameForm());
         }
+
+        static internal void CheckMNArguments(int m, int n = 2)
+        {
+            if (m < 2 || n < 2)
+            {
+                string errorMessage = "Переданные аргументы недопустимо малы";
+                throw new ArgumentOutOfRangeException(errorMessage);
+            }
+        }
+
     }
 }

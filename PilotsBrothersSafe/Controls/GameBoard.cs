@@ -34,7 +34,29 @@ namespace PilotsBrothersSafe.Controls
 
         private Game? game;
 
-        internal int N = 4, M = 4; 
+        private int n = 4, m = 4;
+
+        internal int M
+        {
+            get => m;
+            set
+            {
+                Program.CheckMNArguments(value);
+
+                m = value;
+            }
+        }
+
+        internal int N
+        {
+            get => n;
+            set 
+            {
+                Program.CheckMNArguments(value);
+                
+                n = value;
+            }
+        }
 
         private List<Handle> preparedHandles = new();
 
@@ -78,6 +100,8 @@ namespace PilotsBrothersSafe.Controls
                     case BoardState.GameStarted:
                         SetGameStartedState();
                         break;
+                    default:
+                        throw new NotImplementedException("Недопустимое состояние поля");
                 } 
             } 
         }
@@ -103,7 +127,7 @@ namespace PilotsBrothersSafe.Controls
         private void SetGameStartedState()
         {
             IsSolutionShown = false;
-            game = new Game(M, N);
+            game = new Game(m, n);
             numberOfMovesLabel.Text = OnGoingGameMessage;
             safe.IsOpen = false;
             safe.Hide();
@@ -156,7 +180,7 @@ namespace PilotsBrothersSafe.Controls
 
         internal void AddHandlesToSafe()
         {
-            safe.SetDimensions(M, N);
+            safe.SetDimensions(m, n);
             FillWithHandles();
         }
 
@@ -164,7 +188,7 @@ namespace PilotsBrothersSafe.Controls
         {
             ThrowIfGameNull();
 
-            bool notEnoughPreparedHandles = preparedHandles.Count < M * N;
+            bool notEnoughPreparedHandles = preparedHandles.Count < m * n;
 
             int index = 0;
             foreach (bool position in game.Configuration)

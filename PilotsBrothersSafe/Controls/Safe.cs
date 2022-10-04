@@ -33,12 +33,12 @@ namespace PilotsBrothersSafe.Controls
             }
         }
 
-        internal bool IsWide => Width > Height;
+        private bool IsWide => Width > Height;
 
-        internal int SmallestDimension =>
+        private int SmallestDimension =>
             IsWide ? Height : Width;
 
-        internal int BiggestDimension =>
+        private int BiggestDimension =>
             IsWide ? Width : Height;
 
         internal Safe()
@@ -107,6 +107,8 @@ namespace PilotsBrothersSafe.Controls
 
         internal void SetDimensions(int m, int n)
         {
+            Program.CheckMNArguments(m, n);
+
             tableWithHandles.RowCount = m;
             tableWithHandles.ColumnCount = n;
 

@@ -11,7 +11,7 @@ namespace PilotsBrothersSafe
     {
         internal readonly int m, n;
 
-        private GameRealization gameRealization;
+        private readonly GameRealization gameRealization;
 
         internal readonly List<int>[,] moves;
 
@@ -27,11 +27,7 @@ namespace PilotsBrothersSafe
 
         internal Game(int m, int n)
         {
-            if (m < 3 || n < 3)
-            {
-                string errorMessage = "Переданные аргументы недопустимо малы";
-                throw new ArgumentOutOfRangeException(errorMessage);
-            }   
+            Program.CheckMNArguments(m, n);
 
             this.m = m;
             this.n = n;
@@ -61,6 +57,8 @@ namespace PilotsBrothersSafe
             return move;
         }
 
+
+        // Здесь надо сделать проверку, предположительно после добавления интерфейса
         internal void Move(int rowIndex, int columnIndex)
         {
             NumberOfMoves++;
