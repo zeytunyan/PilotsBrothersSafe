@@ -48,35 +48,34 @@ namespace PilotsBrothersSafe
 
         private void MakeRandomConfiguration()
         {
-            MakeRandomSolution();
-
-            for (int rowIndex = 0; rowIndex < m; rowIndex++)
-                for (int columnIndex = 0; columnIndex < n; columnIndex++)
-                    if (solution[rowIndex, columnIndex])
-                        MoveInConfiguration(rowIndex, columnIndex);
-        }
-
-        private void MakeRandomSolution()
-        {
             int[] rndMoves = MakeRandRangeArray(0, mn);
             int rndNumberOfMoves = rnd.Next(3, mnHalf + 1);
 
             foreach (int rndMove in rndMoves)
             {
-                AddMoveToSolution(rndMove / n, rndMove % n);
-                
+                int rowIndex = rndMove / n;
+                int columnIndex = rndMove % n;
+
+                if (!TryAddMoveToSolution(rowIndex, columnIndex))
+                    continue;
+
+                MoveInConfiguration(rowIndex, columnIndex);
+
                 if (totalSolutionSum == rndNumberOfMoves)
                     break;
             }
         }
 
-        private void AddMoveToSolution(int rowIndex, int columnIndex)
+        private bool TryAddMoveToSolution(int rowIndex, int columnIndex)
         {
             int rowSum = solutionRowSums[rowIndex];
             int columnSum = solutionColumnSums[columnIndex];
+            bool canBeAdded = rowSum < nHalf && columnSum < mHalf;
 
-            if (rowSum < nHalf && columnSum < mHalf)
+            if (canBeAdded)
                 totalSolutionSum += InvertArrayCell(rowIndex, columnIndex, solution);
+
+            return canBeAdded;
         }
 
         internal void Move(int rowIndex, int columnIndex)
@@ -114,34 +113,32 @@ namespace PilotsBrothersSafe
             bool isColumnInverted = TryInvertRowOrColumn(columnIndex, true);
 
             if (isRowInverted || isColumnInverted)
-                OptimizeUnevenSolution();
+                TryInvertRowsOrColumns(isRowInverted);
         }
         
-        private void OptimizeUnevenSolution()
+        private void TryInvertRowsOrColumns(bool isForColumns)
         {
+            int dimensionSize = isForColumns ? n : m;
+
             bool isOptimized = false;
 
-            for (int rowIndex = 0; rowIndex < m; rowIndex++)
-                isOptimized |= TryInvertRowOrColumn(rowIndex);
+            for (int index = 0; index < dimensionSize; index++)
+                isOptimized |= TryInvertRowOrColumn(index, isForColumns);
 
-            for (int columnIndex = 0; columnIndex < n; columnIndex++)
-                isOptimized |= TryInvertRowOrColumn(columnIndex, true);
-
-            if (isOptimized) 
-                OptimizeUnevenSolution();
+            if (isOptimized)
+                TryInvertRowsOrColumns(!isForColumns);
         }
 
         private bool TryInvertRowOrColumn(int index, bool isItColumn = false)
         {
             int maxSumValue = isItColumn ? mHalf : nHalf;
             int[] sumsArray = isItColumn ? solutionColumnSums : solutionRowSums;
+            bool canBeInverted = sumsArray[index] > maxSumValue;
 
-            if (sumsArray[index] <= maxSumValue)
-                return false;
+            if (canBeInverted)
+                totalSolutionSum += Invert(index, solution, isItColumn);
 
-            totalSolutionSum += Invert(index, solution, isItColumn);
-            
-            return true;
+            return canBeInverted;
         }
 
         private void InvertSolution()
@@ -153,9 +150,9 @@ namespace PilotsBrothersSafe
         private int Invert(int index, bool[,] invertibleArray, bool vertically = false)
         {
             int invertedSumChange = 0;
-            int maxIndexValue = vertically ? m : n;
+            int dimensionSize = vertically ? m : n;
 
-            for (int invertedIndex = 0; invertedIndex < maxIndexValue; invertedIndex++)
+            for (int invertedIndex = 0; invertedIndex < dimensionSize; invertedIndex++)
             {
                 int firstIndex = vertically ? invertedIndex : index;
                 int secondIndex = vertically ? index : invertedIndex;
@@ -178,6 +175,7 @@ namespace PilotsBrothersSafe
 
             return changeInSums;
         }
+
 
         private int[] MakeRandRangeArray(int start, int count)
         {
