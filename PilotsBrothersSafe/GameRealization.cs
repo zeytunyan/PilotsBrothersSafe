@@ -13,7 +13,9 @@ namespace PilotsBrothersSafe
     {
         Random rnd = new();
 
-        internal readonly int m, n, mn, mHalf, nHalf, mnHalf;
+        internal readonly int m, n, mn;
+        
+        private readonly int mHalf, nHalf, mnHalf;
 
         private int numberOfVertical = 0, totalSolutionSum = 0;
 
@@ -176,7 +178,6 @@ namespace PilotsBrothersSafe
 
             return changeInSums;
         }
-
 
         private int[] MakeRandRangeArray(int start, int count)
         {

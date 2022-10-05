@@ -57,8 +57,6 @@ namespace PilotsBrothersSafe
             return move;
         }
 
-
-        // Здесь надо сделать проверку, предположительно после добавления интерфейса
         internal void Move(int rowIndex, int columnIndex)
         {
             NumberOfMoves++;
