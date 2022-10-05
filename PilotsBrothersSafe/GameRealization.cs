@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,11 +13,15 @@ namespace PilotsBrothersSafe
     {
         Random rnd = new();
 
-        internal readonly int m, n, mn, mnHalf;
+        internal readonly int m, n, mn, mHalf, nHalf, mnHalf;
+
+        private int numberOfVertical = 0, totalSolutionSum = 0;
 
         internal readonly bool[,] configuration;
 
         internal readonly bool[,] solution;
+
+        private readonly int[] solutionRowSums, solutionColumnSums;
 
         internal bool victory = false;
 
@@ -28,9 +34,13 @@ namespace PilotsBrothersSafe
             this.m = m;
             this.n = n;
             mn = m * n;
+            mHalf = m / 2;
+            nHalf = n / 2;
             mnHalf = mn / 2;
-            solution = new bool[m, n];
             configuration = new bool[m, n];
+            solution = new bool[m, n];
+            solutionRowSums = new int[m];
+            solutionColumnSums = new int[n];
             MakeRandomConfiguration();
         }
 
@@ -41,163 +51,130 @@ namespace PilotsBrothersSafe
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
                 for (int columnIndex = 0; columnIndex < n; columnIndex++)
                     if (solution[rowIndex, columnIndex])
-                        InvertRowColumn(rowIndex, columnIndex, configuration);
+                        MoveInConfiguration(rowIndex, columnIndex);
         }
-
-
-
 
         private void MakeRandomSolution()
         {
             int[] rndMoves = MakeRandRangeArray(0, mn);
             int rndNumberOfMoves = rnd.Next(3, mnHalf + 1);
-            int madeMovesNumber = 0;
 
             foreach (int rndMove in rndMoves)
             {
-                int rowIndex = rndMove / n;
-                int columnIndex = rndMove % n;
-
-                if (!IsGoodMove(rowIndex, columnIndex, rndNumberOfMoves))
-                    continue;
-
-                solution[rowIndex, columnIndex] = true;
-                madeMovesNumber++;
-
-                if (madeMovesNumber == rndNumberOfMoves)
+                AddMoveToSolution(rndMove / n, rndMove % n);
+                
+                if (totalSolutionSum == rndNumberOfMoves)
                     break;
             }
         }
 
-        private bool IsGoodMove(int rowIndex, int columnIndex, int numberOfMoves)
+        private void AddMoveToSolution(int rowIndex, int columnIndex)
         {
-            int rowSum = RowSum(rowIndex, solution);
-            int columnSum = ColumnSum(columnIndex, solution);
-            int m1 = m - 1;
-            int n1 = n - 1;
+            int rowSum = solutionRowSums[rowIndex];
+            int columnSum = solutionColumnSums[columnIndex];
 
-            if (rowSum == n1 || columnSum == m1)
-                return false;
-
-            if (numberOfMoves == m1 && columnSum == m1 - 1)
-                return false;
-
-            if (numberOfMoves == n1 && rowSum == n1 - 1)
-                return false;
-
-            return true;
+            if (rowSum < nHalf && columnSum < mHalf)
+                totalSolutionSum += InvertArrayCell(rowIndex, columnIndex, solution);
         }
 
-
-
-        // Добавить проверку на правильность аргументов
         internal void Move(int rowIndex, int columnIndex)
         {
-            InvertRowColumn(rowIndex, columnIndex, configuration);
+            MoveInConfiguration(rowIndex, columnIndex);
             ChangeSolution(rowIndex, columnIndex);
-            SetVictory();
-        }
-
-        private void SetVictory()
-        {
-            int numberOfVertical = ArraySum(configuration);
             victory = numberOfVertical == 0 || numberOfVertical == mn;
         }
 
+        private void MoveInConfiguration(int rowIndex, int columnIndex)
+        {
+            numberOfVertical += Invert(rowIndex, configuration);
+            numberOfVertical += Invert(columnIndex, configuration, true);
+            numberOfVertical += InvertArrayCell(rowIndex, columnIndex, configuration);
+        }
 
-
-
-
-        //!!!
         private void ChangeSolution(int rowIndex, int columnIndex)
         {
-            solution[rowIndex, columnIndex] ^= true;
+            totalSolutionSum += InvertArrayCell(rowIndex, columnIndex, solution);
+            OptimizeSolution(rowIndex, columnIndex);
+        }
 
-            if (ArraySum(solution) > mnHalf)
-                InvertArray(solution);
-
+        private void OptimizeSolution(int rowIndex, int columnIndex)
+        {
             if (mn % 2 != 0)
-                OptimizeSolution();
+                OptimizeUnevenSolution(rowIndex, columnIndex);
+
+            if (totalSolutionSum > mnHalf)
+                InvertSolution();
         }
 
-        //!!!
-        private void OptimizeSolution()
+        private void OptimizeUnevenSolution(int rowIndex, int columnIndex)
+        {
+            bool isRowInverted = TryInvertRowOrColumn(rowIndex);
+            bool isColumnInverted = TryInvertRowOrColumn(columnIndex, true);
+
+            if (isRowInverted || isColumnInverted)
+                OptimizeUnevenSolution();
+        }
+        
+        private void OptimizeUnevenSolution()
+        {
+            bool isOptimized = false;
+
+            for (int rowIndex = 0; rowIndex < m; rowIndex++)
+                isOptimized |= TryInvertRowOrColumn(rowIndex);
+
+            for (int columnIndex = 0; columnIndex < n; columnIndex++)
+                isOptimized |= TryInvertRowOrColumn(columnIndex, true);
+
+            if (isOptimized) 
+                OptimizeUnevenSolution();
+        }
+
+        private bool TryInvertRowOrColumn(int index, bool isItColumn = false)
+        {
+            int maxSumValue = isItColumn ? mHalf : nHalf;
+            int[] sumsArray = isItColumn ? solutionColumnSums : solutionRowSums;
+
+            if (sumsArray[index] <= maxSumValue)
+                return false;
+
+            totalSolutionSum += Invert(index, solution, isItColumn);
+            
+            return true;
+        }
+
+        private void InvertSolution()
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
-            {
-                int rowSum = RowSum(rowIndex, solution);
+                totalSolutionSum += Invert(rowIndex, solution);
+        }
 
-                if (rowSum > n / 2)
-                    InvertRow(rowIndex, solution);
+        private int Invert(int index, bool[,] invertibleArray, bool vertically = false)
+        {
+            int invertedSumChange = 0;
+            int maxIndexValue = vertically ? m : n;
+
+            for (int invertedIndex = 0; invertedIndex < maxIndexValue; invertedIndex++)
+            {
+                int firstIndex = vertically ? invertedIndex : index;
+                int secondIndex = vertically ? index : invertedIndex;
+                invertedSumChange += InvertArrayCell(firstIndex, secondIndex, invertibleArray);
+            }
+            
+            return invertedSumChange;
+        }
+
+        private int InvertArrayCell(int rowIndex, int columnIndex, bool[,] array)
+        {
+            array[rowIndex, columnIndex] ^= true;
+            int changeInSums = array[rowIndex, columnIndex] ? 1 : -1;
+            
+            if (array == solution)
+            {
+                solutionRowSums[rowIndex] += changeInSums;
+                solutionColumnSums[columnIndex] += changeInSums;
             }
 
-            for (int columnIndex = 0; columnIndex < n; columnIndex++)
-            {
-                int columnSum = ColumnSum(columnIndex, solution);
-
-                if (columnSum > m / 2)
-                    InvertColumn(columnIndex, solution);
-            }
-        }
-
-
-
-
-
-        private void InvertRow(int rowIndex, bool[,] invertibleArray)
-        {
-            for (int columnIndex = 0; columnIndex < n; columnIndex++)
-                invertibleArray[rowIndex, columnIndex] ^= true;
-        }
-
-        private void InvertColumn(int columnIndex, bool[,] invertibleArray)
-        {
-            for (int rowIndex = 0; rowIndex < m; rowIndex++)
-                invertibleArray[rowIndex, columnIndex] ^= true;
-        }
-
-        private void InvertRowColumn(int rowIndex, int columnIndex, bool[,] invertibleArray)
-        {
-            InvertRow(rowIndex, invertibleArray);
-            InvertColumn(columnIndex, invertibleArray);
-            invertibleArray[rowIndex, columnIndex] ^= true;
-        }
-
-        private void InvertArray(bool[,] invertibleArray)
-        {
-            for (int rowIndex = 0; rowIndex < m; rowIndex++)
-                InvertRow(rowIndex, invertibleArray);
-        }
-
-
-        private int RowSum(int rowIndex, bool[,] summableArray)
-        {
-            int rowSum = 0;
-
-            for (int columnIndex = 0; columnIndex < n; columnIndex++)
-                if (summableArray[rowIndex, columnIndex]) rowSum++;
-
-            return rowSum;
-        }
-
-        private int ColumnSum(int columnIndex, bool[,] summableArray)
-        {
-            int columnSum = 0;
-
-            for (int rowIndex = 0; rowIndex < m; rowIndex++)
-                if (summableArray[rowIndex, columnIndex]) columnSum++;
-
-            return columnSum;
-        }
-
-        private int ArraySum(bool[,] summableArray)
-        {
-            int arraySum = 0;
-
-            foreach (bool cell in summableArray)
-                if (cell) arraySum++;
-
-            return arraySum;
+            return changeInSums;
         }
 
 
