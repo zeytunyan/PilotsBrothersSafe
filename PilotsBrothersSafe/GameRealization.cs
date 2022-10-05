@@ -17,11 +17,9 @@ namespace PilotsBrothersSafe
         
         private readonly int mHalf, nHalf, mnHalf;
 
+        internal readonly bool[,] configuration, solution;
+
         private int numberOfVertical = 0, totalSolutionSum = 0;
-
-        internal readonly bool[,] configuration;
-
-        internal readonly bool[,] solution;
 
         private readonly int[] solutionRowSums, solutionColumnSums;
 
@@ -87,8 +85,8 @@ namespace PilotsBrothersSafe
 
         private void MoveInConfiguration(int rowIndex, int columnIndex)
         {
-            numberOfVertical += Invert(rowIndex, configuration);
-            numberOfVertical += Invert(columnIndex, configuration, true);
+            numberOfVertical += InvertRowOrColumn(rowIndex, configuration);
+            numberOfVertical += InvertRowOrColumn(columnIndex, configuration, true);
             numberOfVertical += InvertArrayCell(rowIndex, columnIndex, configuration);
         }
 
@@ -116,27 +114,27 @@ namespace PilotsBrothersSafe
                 TryInvertRowsOrColumns(isRowInverted);
         }
         
-        private void TryInvertRowsOrColumns(bool isForColumns)
+        private void TryInvertRowsOrColumns(bool isColumns)
         {
-            int dimensionSize = isForColumns ? n : m;
+            int dimensionSize = isColumns ? n : m;
 
             bool isOptimized = false;
 
             for (int index = 0; index < dimensionSize; index++)
-                isOptimized |= TryInvertRowOrColumn(index, isForColumns);
+                isOptimized |= TryInvertRowOrColumn(index, isColumns);
 
             if (isOptimized)
-                TryInvertRowsOrColumns(!isForColumns);
+                TryInvertRowsOrColumns(!isColumns);
         }
 
-        private bool TryInvertRowOrColumn(int index, bool isItColumn = false)
+        private bool TryInvertRowOrColumn(int index, bool isColumn = false)
         {
-            int maxSumValue = isItColumn ? mHalf : nHalf;
-            int[] sumsArray = isItColumn ? solutionColumnSums : solutionRowSums;
+            int maxSumValue = isColumn ? mHalf : nHalf;
+            int[] sumsArray = isColumn ? solutionColumnSums : solutionRowSums;
             bool canBeInverted = sumsArray[index] > maxSumValue;
 
             if (canBeInverted)
-                totalSolutionSum += Invert(index, solution, isItColumn);
+                totalSolutionSum += InvertRowOrColumn(index, solution, isColumn);
 
             return canBeInverted;
         }
@@ -144,18 +142,18 @@ namespace PilotsBrothersSafe
         private void InvertSolution()
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
-                totalSolutionSum += Invert(rowIndex, solution);
+                totalSolutionSum += InvertRowOrColumn(rowIndex, solution);
         }
 
-        private int Invert(int index, bool[,] invertibleArray, bool vertically = false)
+        private int InvertRowOrColumn(int index, bool[,] invertibleArray, bool isColumn = false)
         {
             int invertedSumChange = 0;
-            int dimensionSize = vertically ? m : n;
+            int dimensionSize = isColumn ? m : n;
 
             for (int invertedIndex = 0; invertedIndex < dimensionSize; invertedIndex++)
             {
-                int firstIndex = vertically ? invertedIndex : index;
-                int secondIndex = vertically ? index : invertedIndex;
+                int firstIndex = isColumn ? invertedIndex : index;
+                int secondIndex = isColumn ? index : invertedIndex;
                 invertedSumChange += InvertArrayCell(firstIndex, secondIndex, invertibleArray);
             }
             
@@ -175,7 +173,6 @@ namespace PilotsBrothersSafe
 
             return changeInSums;
         }
-
 
         private int[] MakeRandRangeArray(int start, int count)
         {
