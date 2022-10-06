@@ -31,7 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameBoard));
             this.gameBoardTable = new System.Windows.Forms.TableLayoutPanel();
             this.gameControls = new System.Windows.Forms.TableLayoutPanel();
+            this.backToMenuButton = new PilotsBrothersSafe.Controls.GameInterfaceButton();
+            this.restartButton = new PilotsBrothersSafe.Controls.GameInterfaceButton();
+            this.solveButton = new PilotsBrothersSafe.Controls.GameInterfaceButton();
+            this.helpButton = new PilotsBrothersSafe.Controls.HelpButton();
             this.numberOfMovesLabel = new System.Windows.Forms.Label();
+            this.safe = new PilotsBrothersSafe.Controls.Safe();
             this.gameBoardTable.SuspendLayout();
             this.gameControls.SuspendLayout();
             this.SuspendLayout();
