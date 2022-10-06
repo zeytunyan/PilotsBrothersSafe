@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PilotsBrothersSafe.GameRealizations;
 
 namespace PilotsBrothersSafe
 {
@@ -11,17 +12,19 @@ namespace PilotsBrothersSafe
     {
         internal readonly int m, n;
 
-        private readonly GameRealization gameRealization;
+        private readonly GameRealizationArrays gameRealization;
+
+       // private readonly GameRealizationBitwise gameRealization;
 
         internal readonly List<int>[,] moves;
 
         internal int NumberOfMoves { get; private set; } = 0;
 
-        internal bool[,] Configuration => gameRealization.configuration;
+        internal bool[,] Configuration => gameRealization.Configuration;
 
         internal List<int> Solution { get; private set; }
 
-        internal bool Victory => gameRealization.victory;
+        internal bool Victory => gameRealization.Victory;
 
         internal Game(int n) : this(n, n) { }
 
@@ -33,7 +36,8 @@ namespace PilotsBrothersSafe
             this.n = n;
             moves = new List<int>[m, n];
             MakeMoves();
-            gameRealization = new GameRealization(m, n);
+            gameRealization = new GameRealizationArrays(m, n);
+            //gameRealization = new GameRealizationBitwise(m, n);
             PullSolution();
         }
 
@@ -70,7 +74,7 @@ namespace PilotsBrothersSafe
 
             for (int i = 0; i < m; i++)
                 for (int j = 0; j < n; j++)
-                    if (gameRealization.solution[i, j])
+                    if (gameRealization.Solution[i, j])
                         Solution.Add(i * n + j);
         }
     }

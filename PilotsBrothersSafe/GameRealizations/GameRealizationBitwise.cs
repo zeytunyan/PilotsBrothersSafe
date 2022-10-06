@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PilotsBrothersSafe
+namespace PilotsBrothersSafe.GameRealizations
 {
     internal class GameRealizationBitwise
     {
@@ -15,15 +15,15 @@ namespace PilotsBrothersSafe
 
         private readonly int mHalf, nHalf, mnHalf, mMinOne, nMinOne, mnMinOne;
 
-        internal ulong configuration = 0, solution = 0;
+        private ulong configuration = 0, solution = 0;
 
-        private readonly ulong filledBoard, twoNPowMinOne, twoMNPowMinOne;
+        private readonly ulong filledBoard, twoNPowMinOne;
 
         private int totalSolutionSum = 0;
 
         private readonly int[] solutionRowSums, solutionColumnSums;
 
-        internal bool victory = false;
+        internal bool Victory => configuration == filledBoard || configuration == 0;
 
         private readonly ulong[] rows, columns;
 
@@ -56,9 +56,8 @@ namespace PilotsBrothersSafe
             nMinOne = n - 1;
             mnMinOne = mn - 1;
 
-            filledBoard = (((1ul << (mn - 1)) - 1ul) << 1) + 1ul;
+            filledBoard = ((1ul << mn - 1) - 1ul << 1) + 1ul;
             twoNPowMinOne = (1ul << n) - 1ul;
-            twoMNPowMinOne = (1ul << mn) - 1ul;
             rows = new ulong[m];
             columns = new ulong[n];
             moves = new ulong[m, n];
@@ -77,7 +76,7 @@ namespace PilotsBrothersSafe
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
             {
                 int positionInNum = mMinOne - rowIndex;
-                rows[rowIndex] = twoNPowMinOne << (n * positionInNum);
+                rows[rowIndex] = twoNPowMinOne << n * positionInNum;
             }
         }
 
@@ -86,14 +85,14 @@ namespace PilotsBrothersSafe
             for (int columnIndex = 0; columnIndex < n; columnIndex++)
             {
                 int positionInNum = nMinOne - columnIndex;
-                columns[columnIndex] = (twoMNPowMinOne / twoNPowMinOne) << positionInNum;
+                columns[columnIndex] = filledBoard / twoNPowMinOne << positionInNum;
             }
         }
 
         private void MakeRowColumnCrosses()
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
-                for (int columnIndex = 0; columnIndex < n; rowIndex++)
+                for (int columnIndex = 0; columnIndex < n; columnIndex++)
                     moves[rowIndex, columnIndex] = rows[rowIndex] | columns[columnIndex];
         }
 
@@ -101,7 +100,7 @@ namespace PilotsBrothersSafe
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
             {
-                for (int columnIndex = 0; columnIndex < n; rowIndex++)
+                for (int columnIndex = 0; columnIndex < n; columnIndex++)
                 {
                     int positionInNum = mnMinOne - rowIndex * n - columnIndex;
                     solutionMoves[rowIndex, columnIndex] = 1ul << positionInNum;
@@ -145,7 +144,6 @@ namespace PilotsBrothersSafe
         {
             configuration ^= moves[rowIndex, columnIndex];
             ChangeSolution(rowIndex, columnIndex);
-            victory = configuration == filledBoard || configuration == 0;
         }
 
         private void ChangeSolution(int rowIndex, int columnIndex)
@@ -209,12 +207,12 @@ namespace PilotsBrothersSafe
 
         private void InvertSolutionRowOrColumn(int index, bool isColumn)
         {
-            int[] sameDimensionSumArray = isColumn ? solutionColumnSums : solutionRowSums;;
+            int[] sameDimensionSumArray = isColumn ? solutionColumnSums : solutionRowSums; ;
             ulong invertionRowOrColumn = isColumn ? columns[index] : rows[index];
 
             solution ^= invertionRowOrColumn;
             sameDimensionSumArray[index] = OneBitsNumber(solution & invertionRowOrColumn);
-            UpdateSolutionSumsArray(isColumn); 
+            UpdateSolutionSumsArray(isColumn);
             totalSolutionSum = OneBitsNumber(solution);
         }
 
@@ -249,10 +247,10 @@ namespace PilotsBrothersSafe
 
         private int OneBitsNumber(ulong num)
         {
-            num -= (num >> 1) & 0x5555555555555555ul;
-            num = ((num >> 2) & 0x3333333333333333ul) + (num & 0x3333333333333333ul);
-            num = ((((num >> 4) + num) & 0x0F0F0F0F0F0F0F0Ful) * 0x0101010101010101) >> 56;
-            return (int)num; 
+            num -= num >> 1 & 0x5555555555555555ul;
+            num = (num >> 2 & 0x3333333333333333ul) + (num & 0x3333333333333333ul);
+            num = ((num >> 4) + num & 0x0F0F0F0F0F0F0F0Ful) * 0x0101010101010101 >> 56;
+            return (int)num;
         }
 
         private bool[,] UlongToBoolArray(ulong ulNum)
@@ -261,7 +259,7 @@ namespace PilotsBrothersSafe
 
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
             {
-                for (int columnIndex = 0; columnIndex < n; rowIndex++)
+                for (int columnIndex = 0; columnIndex < n; columnIndex++)
                 {
                     ulong ulongPositionValue = solutionMoves[rowIndex, columnIndex] & ulNum;
                     boolArray[rowIndex, columnIndex] = ulongPositionValue != 0;
