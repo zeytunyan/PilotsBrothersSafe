@@ -111,10 +111,10 @@ namespace PilotsBrothersSafe
             bool isColumnInverted = TryInvertRowOrColumn(columnIndex, true);
 
             if (isRowInverted || isColumnInverted)
-                TryInvertRowsOrColumns(isRowInverted);
+                UseTryInvertForAllRowsOrColumns(isRowInverted);
         }
         
-        private void TryInvertRowsOrColumns(bool isColumns)
+        private void UseTryInvertForAllRowsOrColumns(bool isColumns)
         {
             int dimensionSize = isColumns ? n : m;
 
@@ -124,7 +124,7 @@ namespace PilotsBrothersSafe
                 isOptimized |= TryInvertRowOrColumn(index, isColumns);
 
             if (isOptimized)
-                TryInvertRowsOrColumns(!isColumns);
+                UseTryInvertForAllRowsOrColumns(!isColumns);
         }
 
         private bool TryInvertRowOrColumn(int index, bool isColumn = false)

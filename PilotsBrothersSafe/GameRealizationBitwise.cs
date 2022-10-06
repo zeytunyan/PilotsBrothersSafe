@@ -169,60 +169,62 @@ namespace PilotsBrothersSafe
                 solution ^= filledBoard;
         }
 
-
-
         private void OptimizeUnevenSolution(int rowIndex, int columnIndex)
         {
             bool isRowInverted = TryInvertRowOrColumn(rowIndex);
             bool isColumnInverted = TryInvertRowOrColumn(columnIndex, true);
 
             if (isRowInverted || isColumnInverted)
-                TryInvertRowsOrColumns(isRowInverted);
+                UseTryInvertForAllRowsOrColumns(isRowInverted);
         }
 
-        private void TryInvertRowsOrColumns(bool isForColumns)
+        private void UseTryInvertForAllRowsOrColumns(bool isColumns)
         {
-            int dimensionSize = isForColumns ? n : m;
+            int dimensionSize = isColumns ? n : m;
 
             bool isOptimized = false;
 
             for (int index = 0; index < dimensionSize; index++)
-                isOptimized |= TryInvertRowOrColumn(index, isForColumns);
+                isOptimized |= TryInvertRowOrColumn(index, isColumns);
 
             if (isOptimized)
-                TryInvertRowsOrColumns(!isForColumns);
+                UseTryInvertForAllRowsOrColumns(!isColumns);
         }
 
-        private bool TryInvertRowOrColumn(int index, bool isItColumn = false)
+        private bool TryInvertRowOrColumn(int index, bool isColumn = false)
         {
-            int maxSumValue = isItColumn ? mHalf : nHalf;
-            int[] sumsArray = isItColumn ? solutionColumnSums : solutionRowSums;
+            int maxSumValue = isColumn ? mHalf : nHalf;
+            int[] sumsArray = isColumn ? solutionColumnSums : solutionRowSums;
             bool canBeInverted = sumsArray[index] > maxSumValue;
 
             if (canBeInverted)
-                totalSolutionSum += Invert(index, isItColumn);
+                InvertSolutionRowOrColumn(index, isColumn);
 
             return canBeInverted;
         }
 
-        private void InvertSolutionRowOrColumn(int index, bool isColumn = false)
+        private void InvertSolutionRowOrColumn(int index, bool isColumn)
         {
-            int[] sameDimensionSumArray = isColumn ? solutionColumnSums : solutionRowSums;
-            int[] anotherDimensionSumArray = isColumn ? solutionRowSums : solutionColumnSums;
+            int[] sameDimensionSumArray = isColumn ? solutionColumnSums : solutionRowSums;;
             ulong invertionRowOrColumn = isColumn ? columns[index] : rows[index];
 
             solution ^= invertionRowOrColumn;
             sameDimensionSumArray[index] = OneBitsNumber(solution & invertionRowOrColumn);
-            UpdateSolutionSumsArray(); // параметры добавить
-
+            UpdateSolutionSumsArray(isColumn); 
             totalSolutionSum = OneBitsNumber(solution);
         }
 
-        private void UpdateSolutionSumsArray()
+        private void UpdateSolutionSumsArray(bool isRowSums)
         {
+            int[] updatedSumsArray = isRowSums ? solutionRowSums : solutionColumnSums;
+            ulong[] rowsOrColumns = isRowSums ? rows : columns;
 
+            for (int index = 0; index < updatedSumsArray.Length; index++)
+            {
+                ulong rowOrColumnToCountSum = rowsOrColumns[index] & solution;
+                updatedSumsArray[index] = OneBitsNumber(rowOrColumnToCountSum);
+            }
         }
-
 
         private int[] MakeRandRangeArray(int start, int count)
         {
@@ -240,7 +242,6 @@ namespace PilotsBrothersSafe
 
             Array.Sort(rndOrder, randomizedArray);
         }
-
 
         private int OneBitsNumber(ulong num)
         {
