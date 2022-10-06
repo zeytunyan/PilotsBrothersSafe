@@ -16,7 +16,8 @@ namespace PilotsBrothersSafe.Controls
 {
     public partial class GameBoard : UserControl
     {
-        private GameForm gameForm;
+        private GameForm? gameForm;
+
 
         internal enum BoardState
         {
@@ -120,17 +121,17 @@ namespace PilotsBrothersSafe.Controls
             victoryTimer.Stop();
             solveButton.Enabled = false;
             numberOfMovesLabel.Text = VictoryMessage;
-            safe.Enabled = true;
             safe.IsOpen = true;
+            safe.Enabled = true;
         }
 
         private void SetGameStartedState()
         {
+            safe.Hide();
             IsSolutionShown = false;
             game = new Game(m, n);
             numberOfMovesLabel.Text = OnGoingGameMessage;
             safe.IsOpen = false;
-            safe.Hide();
             ClearSafe();
             AddHandlesToSafe();
             safe.Show();
@@ -246,7 +247,7 @@ namespace PilotsBrothersSafe.Controls
         {
             ThrowIfGameNull();
 
-            foreach (int handleIndex in game.moves[row, column])
+            foreach (int handleIndex in game.Moves[row, column])
                 InteractWithHandle(safe[handleIndex], interaction);
         }
 

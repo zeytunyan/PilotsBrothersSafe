@@ -31,12 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameBoard));
             this.gameBoardTable = new System.Windows.Forms.TableLayoutPanel();
             this.gameControls = new System.Windows.Forms.TableLayoutPanel();
-            this.backToMenuButton = new PilotsBrothersSafe.Controls.GameInterfaceButton();
-            this.restartButton = new PilotsBrothersSafe.Controls.GameInterfaceButton();
-            this.solveButton = new PilotsBrothersSafe.Controls.GameInterfaceButton();
-            this.helpButton = new PilotsBrothersSafe.Controls.HelpButton();
             this.numberOfMovesLabel = new System.Windows.Forms.Label();
-            this.safe = new PilotsBrothersSafe.Controls.Safe();
             this.gameBoardTable.SuspendLayout();
             this.gameControls.SuspendLayout();
             this.SuspendLayout();
@@ -157,11 +152,11 @@
             this.safe.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("safe.BackgroundImage")));
             this.safe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.safe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.safe.IsOpen = false;
             this.safe.Location = new System.Drawing.Point(3, 116);
             this.safe.Name = "safe";
             this.safe.Size = new System.Drawing.Size(512, 513);
-            this.safe.TabIndex = 4;
+            this.safe.TabIndex = 3;
+            this.safe.TabStop = false;
             // 
             // GameBoard
             // 

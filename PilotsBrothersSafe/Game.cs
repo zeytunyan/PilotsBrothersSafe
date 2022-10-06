@@ -11,18 +11,12 @@ namespace PilotsBrothersSafe
     internal class Game
     {
         internal readonly int m, n;
+        private readonly GameRealization gameRealization;
 
-        private readonly GameRealizationArrays gameRealization;
-
-       // private readonly GameRealizationBitwise gameRealization;
-
-        internal readonly List<int>[,] moves;
-
+        internal List<int>[,] Moves { get; private set; }
         internal int NumberOfMoves { get; private set; } = 0;
-
+        internal List<int>? Solution { get; private set; }
         internal bool[,] Configuration => gameRealization.Configuration;
-
-        internal List<int> Solution { get; private set; }
 
         internal bool Victory => gameRealization.Victory;
 
@@ -34,10 +28,13 @@ namespace PilotsBrothersSafe
 
             this.m = m;
             this.n = n;
-            moves = new List<int>[m, n];
+            Moves = new List<int>[m, n];
             MakeMoves();
-            gameRealization = new GameRealizationArrays(m, n);
-            //gameRealization = new GameRealizationBitwise(m, n);
+            
+            gameRealization = m * n < 65 ? 
+                new GameRealizationBitwise(m, n) : 
+                new GameRealizationArrays(m, n);
+            
             PullSolution();
         }
 
@@ -45,7 +42,7 @@ namespace PilotsBrothersSafe
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
                 for (int columnIndex = 0; columnIndex < n; columnIndex++)
-                    moves[rowIndex, columnIndex] = MakeMove(rowIndex, columnIndex);
+                    Moves[rowIndex, columnIndex] = MakeMove(rowIndex, columnIndex);
         }
 
         private List<int> MakeMove(int rowIndex, int columnIndex)

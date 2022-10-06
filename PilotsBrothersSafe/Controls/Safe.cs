@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace PilotsBrothersSafe.Controls
 {
+    // Элемент интерфейса - сейф, в котором расположены рукоятки
     public partial class Safe : UserControl
     {
+        // При победе сейф открывается
         private bool isOpen = false;
 
         internal bool IsOpen
@@ -33,6 +35,7 @@ namespace PilotsBrothersSafe.Controls
             }
         }
 
+        // Свойства для расчета размеров и положения таблицы с рукоятками
         private bool IsWide => Width > Height;
 
         private int SmallestDimension =>
@@ -64,16 +67,19 @@ namespace PilotsBrothersSafe.Controls
 
         private void SetSizeForTableWithHandles()
         {
+            // Таблица с рукоятками должна занимать около 53% сейфа
             int tableDimensionSize = SmallestDimension * 53 / 100;
             int widthDivider = tableWithHandles.ColumnCount;
             int heightDivider = tableWithHandles.RowCount;
 
+            // Окончательное значение должно делиться на количество строк и столбцов
             int finalWidthSize = CalcFinalDimensionSize(tableDimensionSize, widthDivider);
             int finalHeightSize = CalcFinalDimensionSize(tableDimensionSize, heightDivider);
 
             tableWithHandles.Size = new Size(finalWidthSize, finalHeightSize);
         }
 
+        // Подсчет итогового размера, при котором все столбцы и строки будут одинаковы
         private int CalcFinalDimensionSize(int dimensionSize, int divider)
         {
             int minSize = dimensionSize / divider * divider;
@@ -83,9 +89,11 @@ namespace PilotsBrothersSafe.Controls
 
             return spreadForMin < spreadForMax ? minSize : maxSize;
         }
-
+ 
         private void SetLocationForTableWithHandles()
         {
+            // Таблица с рукоятками должна быть сдвинута
+            // где-то на 22%, чтобы быть по центру сейфа
             int smallerIndent = SmallestDimension * 22 / 100;
             int additionalIndent = BiggestDimension  / 2 - SmallestDimension / 2;
             int biggerIndent = smallerIndent + additionalIndent;

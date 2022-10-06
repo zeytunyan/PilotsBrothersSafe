@@ -12,6 +12,7 @@ namespace PilotsBrothersSafe.Controls
 {
     public partial class GameInterfaceButton : Button
     {
+        // Кнопка, используемая в интерфейсе игры.
         internal GameInterfaceButton()
         {
             InitializeComponent();

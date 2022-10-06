@@ -12,6 +12,7 @@ using System.Windows.Forms.VisualStyles;
 
 namespace PilotsBrothersSafe.Controls
 {
+    // Поворачивающаяся рукоятка
     public partial class Handle : PictureBox
     {
         private bool isVertical;
@@ -30,12 +31,17 @@ namespace PilotsBrothersSafe.Controls
             }
         }
 
+        /* Внешний вид (фон) может принимать 4 значения:
+            1. Прозрачный фон
+            2. Закрашено темным (для подсказки)
+            3. Подсвечено (при наведении)
+            4. И закрашено, и подсвечено */
         internal enum States
         {
-            Default,
-            PaintedOver,
-            Highlighted,
-            PaintedOverHighlighted
+            Default, 
+            PaintedOver, 
+            Highlighted, 
+            PaintedOverHighlighted 
         }
 
         private States state = States.Default;
@@ -63,7 +69,7 @@ namespace PilotsBrothersSafe.Controls
         }
 
         internal Handle() : this(false) { }
-
+        
         internal Handle(bool position)
         {
             InitializeComponent();

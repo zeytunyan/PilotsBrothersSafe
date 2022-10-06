@@ -14,6 +14,7 @@ namespace PilotsBrothersSafe
             Application.Run(new GameForm());
         }
 
+        // ѕроверка на то, адекватны ли переданные размеры пол€, используема€ повсюду в программе.
         static internal void CheckMNArguments(int m, int n = 2)
         {
             if (m < 2 || n < 2)
