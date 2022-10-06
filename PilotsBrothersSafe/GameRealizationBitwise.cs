@@ -17,7 +17,7 @@ namespace PilotsBrothersSafe
 
         internal ulong configuration = 0, solution = 0;
 
-        private ulong filledBoard, twoNPowMinOne, twoMNPowMinOne;
+        private readonly ulong filledBoard, twoNPowMinOne, twoMNPowMinOne;
 
         private int totalSolutionSum = 0;
 
@@ -28,6 +28,10 @@ namespace PilotsBrothersSafe
         private readonly ulong[] rows, columns;
 
         private readonly ulong[,] solutionMoves, moves;
+
+        internal bool[,] Solution => UlongToBoolArray(solution);
+
+        internal bool[,] Configuration => UlongToBoolArray(configuration);
 
         internal GameRealizationBitwise(int n) : this(n, n) { }
 
@@ -250,43 +254,21 @@ namespace PilotsBrothersSafe
             num = ((((num >> 4) + num) & 0x0F0F0F0F0F0F0F0Ful) * 0x0101010101010101) >> 56;
             return (int)num; 
         }
+
+        private bool[,] UlongToBoolArray(ulong ulNum)
+        {
+            bool[,] boolArray = new bool[m, n];
+
+            for (int rowIndex = 0; rowIndex < m; rowIndex++)
+            {
+                for (int columnIndex = 0; columnIndex < n; rowIndex++)
+                {
+                    ulong ulongPositionValue = solutionMoves[rowIndex, columnIndex] & ulNum;
+                    boolArray[rowIndex, columnIndex] = ulongPositionValue != 0;
+                }
+            }
+
+            return boolArray;
+        }
     }
 }
-
-//private void InvertSolution()
-//{
-//    for (int rowIndex = 0; rowIndex < m; rowIndex++)
-//        totalSolutionSum += Invert(rowIndex, solution);
-//}
-
-
-//// i - строка от 0, j - столбец от 0, m - количество строк, n - количество столбцов
-//static ulong Formula(int i, int j, int m, int n = 0)
-//{
-//    if (n == 0)
-//    {
-//        n = m;
-//    }
-
-//    int mn = m * n;
-
-//    if (mn > 63 || i >= m || j >= n)
-//    {
-//        throw new ArgumentOutOfRangeException("Переданные аргументы недопустимо велики");
-//    }
-//    else if (i < 0 || j < 0 || m < 2 || n < 2)
-//    {
-//        throw new ArgumentOutOfRangeException("Переданные аргументы недопустимо малы");
-//    }
-
-//    int positionIInNumber = m - i - 1;
-//    int positionJInNumber = n - j - 1;
-
-//    ulong twoInNPowMimusOne = (1ul << n) - 1ul;
-//    ulong twoInNMPowMinusOne = (1ul << mn) - 1ul;
-//    ulong row = twoInNPowMimusOne << (n * positionIInNumber);
-//    ulong column = (twoInNMPowMinusOne / twoInNPowMimusOne) << positionJInNumber;
-
-//    return column | row;
-//}
-//}
