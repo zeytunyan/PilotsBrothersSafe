@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace PilotsBrothersSafe.GameRealizations
 {
+    // Реализация с использованием ulong-чисел и побитовых операций
     internal class GameRealizationBitwise : GameRealization
     {
+        // Данные для работы
         private readonly int mMinOne, nMinOne, mnMinOne;
         private ulong configuration = 0, solution = 0;
         private readonly ulong filledConfiguration, twoNPowMinOne;
@@ -16,6 +18,7 @@ namespace PilotsBrothersSafe.GameRealizations
         private readonly ulong[] rows, columns;
         private readonly ulong[,] solutionMoves, moves;
 
+        // Реализация свойств для взаимодействия с другими классами
         internal override bool[,] Configuration => UlongToBoolArray(configuration);
         internal override bool[,] Solution => UlongToBoolArray(solution);
         internal override bool Victory => 
@@ -25,6 +28,7 @@ namespace PilotsBrothersSafe.GameRealizations
 
         internal GameRealizationBitwise(int m, int n) : base(m, n)
         {
+            // Проверка, чтобы поле не было больше, чем может поместиться в 64 бита
             if (mn > 64)
             {
                 string errorMessage = "Переданные аргументы недопустимо велики";
@@ -35,6 +39,9 @@ namespace PilotsBrothersSafe.GameRealizations
             nMinOne = n - 1;
             mnMinOne = mn - 1;
             twoNPowMinOne = (1ul << n) - 1ul;
+
+            // То же, что и (1ul << mn) - 1ul
+            // Так сделано, чтобы влезть в 64 бита
             filledConfiguration = ((1ul << mn - 1) - 1ul << 1) + 1ul;
             
             rows = new ulong[m];
@@ -49,6 +56,10 @@ namespace PilotsBrothersSafe.GameRealizations
             MakeRandomConfiguration();
         }
 
+        // Далее следуют 4 метода, создающие массивы с числами, требуемыми для различных 
+        // побитовых операций, соответствующих тем или иным преобразованиям поля или решения 
+
+        // Строки
         private void MakeRows()
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
@@ -58,6 +69,7 @@ namespace PilotsBrothersSafe.GameRealizations
             }
         }
 
+        // Столбцы
         private void MakeColumns()
         {
             for (int columnIndex = 0; columnIndex < n; columnIndex++)
@@ -67,6 +79,7 @@ namespace PilotsBrothersSafe.GameRealizations
             }
         }
 
+        // Соответствующие ходам пересечения строк и столбцов
         private void MakeRowColumnCrosses()
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
@@ -74,6 +87,7 @@ namespace PilotsBrothersSafe.GameRealizations
                     moves[rowIndex, columnIndex] = rows[rowIndex] | columns[columnIndex];
         }
 
+        // Сами ходы (отдельные позиции в числе, установленные в 1)
         private void MakeSolutionMoves()
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
@@ -86,10 +100,15 @@ namespace PilotsBrothersSafe.GameRealizations
             }
         }
 
+
+        // Попытка добавить ход в решение
         private protected override bool TryAddMoveToSolution(int rowIndex, int columnIndex)
         {
             int rowSum = solutionRowSums[rowIndex];
             int columnSum = solutionColumnSums[columnIndex];
+
+            // Ход добавляется в решение, только если данная строка
+            // и столбец заняты ходами менее, чем наполовину. 
             bool canBeAdded = rowSum < nHalf && columnSum < mHalf;
 
             if (canBeAdded)
@@ -107,16 +126,20 @@ namespace PilotsBrothersSafe.GameRealizations
             OptimizeSolution(rowIndex, columnIndex);
         }
 
+        // Ход в решении
         private void MoveToSolution(int rowIndex, int columnIndex)
         {
             ulong moveToSolution = solutionMoves[rowIndex, columnIndex];
             solution ^= moveToSolution;
+
+            // Пересчет сумм ходов в решении
             int changeInSums = (solution & moveToSolution) == 0 ? -1 : 1;
             solutionRowSums[rowIndex] += changeInSums;
             solutionColumnSums[columnIndex] += changeInSums;
             totalSolutionSum += changeInSums;
         }
 
+        // Попытка инвертировать столбец или строку решения
         private protected override bool TryInvertRowOrColumn(int index, bool isColumn = false)
         {
             int maxSumValue = isColumn ? mHalf : nHalf;
@@ -129,20 +152,25 @@ namespace PilotsBrothersSafe.GameRealizations
             return canBeInverted;
         }
 
+        // Инвертирование какой-либо строки или столбца решения
         private void InvertSolutionRowOrColumn(int index, bool isColumn)
         {
             int[] sameDimensionSumArray = isColumn ? solutionColumnSums : solutionRowSums; ;
             ulong invertionRowOrColumn = isColumn ? columns[index] : rows[index];
 
             solution ^= invertionRowOrColumn;
+
+            // Пересчет сумм ходов в решении
             sameDimensionSumArray[index] = OneBitsNumber(solution & invertionRowOrColumn);
             UpdateSolutionSumsArray(isColumn);
             totalSolutionSum = OneBitsNumber(solution);
         }
 
+        // Инвертирование всего решения
         private protected override void InvertSolution() =>
             solution ^= filledConfiguration;
 
+        // Пересчитывает количество ходов в строках или столбцах решения
         private void UpdateSolutionSumsArray(bool isRowSums)
         {
             int[] updatedSumsArray = isRowSums ? solutionRowSums : solutionColumnSums;
@@ -155,6 +183,7 @@ namespace PilotsBrothersSafe.GameRealizations
             }
         }
 
+        // Подсчитывает количество единичных битов в ulong-числе
         private int OneBitsNumber(ulong num)
         {
             num -= num >> 1 & 0x5555555555555555ul;
@@ -163,6 +192,7 @@ namespace PilotsBrothersSafe.GameRealizations
             return (int)num;
         }
 
+        // Преобразование ulong-числа в двумерный массив для передачи другим классам
         private bool[,] UlongToBoolArray(ulong ulNum)
         {
             bool[,] boolArray = new bool[m, n];
