@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace PilotsBrothersSafe.GameRealizations
 {
+    // Реализация с использованием массивов и циклов
     internal class GameRealizationArrays : GameRealization
     {
+        // Данные для работы
         private readonly bool[,] configuration, solution;
-
         private int numberOfVertical = 0;
 
+        // Реализация свойств для взаимодействия с другими классами
         internal override bool[,] Configuration => configuration;
         internal override bool[,] Solution => solution;
         internal override bool Victory => 
@@ -30,10 +32,14 @@ namespace PilotsBrothersSafe.GameRealizations
             MakeRandomConfiguration();
         }
 
+        // Попытка добавить ход в решение
         private protected override bool TryAddMoveToSolution(int rowIndex, int columnIndex)
         {
             int rowSum = solutionRowSums[rowIndex];
             int columnSum = solutionColumnSums[columnIndex];
+            
+            // Ход добавляется в решение, только если данная строка
+            // и столбец заняты ходами менее, чем наполовину. 
             bool canBeAdded = rowSum < nHalf && columnSum < mHalf;
 
             if (canBeAdded)
@@ -55,6 +61,7 @@ namespace PilotsBrothersSafe.GameRealizations
             OptimizeSolution(rowIndex, columnIndex);
         }
 
+        // Попытка инвертировать столбец или строку решения
         private protected override bool TryInvertRowOrColumn(int index, bool isColumn = false)
         {
             int maxSumValue = isColumn ? mHalf : nHalf;
@@ -67,6 +74,7 @@ namespace PilotsBrothersSafe.GameRealizations
             return canBeInverted;
         }
 
+        // Инвертирование какой-либо строки или столбца
         private void InvertRowOrColumn(int index, bool[,] invertibleArray, bool isColumn = false)
         {
             int dimensionSize = isColumn ? m : n;
@@ -79,11 +87,14 @@ namespace PilotsBrothersSafe.GameRealizations
             }
         }
 
+        // Инвертирование конкретной ячейки массива
         private void InvertArrayCell(int rowIndex, int columnIndex, bool[,] array)
         {
             array[rowIndex, columnIndex] ^= true;
             int changeInSums = array[rowIndex, columnIndex] ? 1 : -1;
 
+
+            // После инвертирования пересчитываются все суммы, которые необходимо 
             if (array == configuration)
             {
                 numberOfVertical += changeInSums;
@@ -95,11 +106,11 @@ namespace PilotsBrothersSafe.GameRealizations
             totalSolutionSum += changeInSums;
         }
 
+        // Инвертирование всего решения
         private protected override void InvertSolution()
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
                 InvertRowOrColumn(rowIndex, solution);
         }
-
     }
 }

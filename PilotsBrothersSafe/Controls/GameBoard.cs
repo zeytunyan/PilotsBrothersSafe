@@ -14,11 +14,14 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace PilotsBrothersSafe.Controls
 {
+    // Игровое поле с кнопками и сейфом, на котором расположены рукоятки
+    // Всё взаимодействие пользователя во время игры происходит с этим элементом
     public partial class GameBoard : UserControl
     {
+        // Ссылка на главную форму
         private GameForm? gameForm;
 
-
+        // Три состояния: дефолтное (поле скрыто), новая игра и победа
         internal enum BoardState
         {
             Default,
@@ -26,6 +29,7 @@ namespace PilotsBrothersSafe.Controls
             Victory
         }
 
+        // Три варианта взаимодействия мышкой: наведение, клик и удаление наведения
         private enum Interaction
         {
             Move,
@@ -35,6 +39,7 @@ namespace PilotsBrothersSafe.Controls
 
         private Game? game;
 
+        // По умолчанию размеры поля - 4х4
         private int n = 4, m = 4;
 
         internal int M
@@ -67,6 +72,8 @@ namespace PilotsBrothersSafe.Controls
         {
             InitializeComponent();
             Dock = DockStyle.Fill;
+            // После победы сейф открывается с задержкой,
+            // чтобы пользователь успел увидеть, что все рукоятки параллельны
             victoryTimer.Interval = 750;
             victoryTimer.Tick += victoryTimer_Tick; 
         }
@@ -80,6 +87,7 @@ namespace PilotsBrothersSafe.Controls
             gameForm.CancelButton = backToMenuButton;
         }
 
+        // Свойства и методы для установки и изменения состояний поля 
         private BoardState state = BoardState.Default;
 
         internal BoardState State {
@@ -138,7 +146,7 @@ namespace PilotsBrothersSafe.Controls
             solveButton.Enabled = true;
         }
 
-
+        // Показ и скрытие подсказки
         private bool isSolutionShown = false;
 
         private bool IsSolutionShown
@@ -164,7 +172,7 @@ namespace PilotsBrothersSafe.Controls
                 safe[handleIndex].State ^= HandleSates.PaintedOver;
         }
 
-
+        // Свойства для отображения количества ходов
         private int NumberOfMoves => game?.NumberOfMoves ?? 0;
 
         private string OnGoingGameMessage =>
@@ -173,6 +181,7 @@ namespace PilotsBrothersSafe.Controls
         private string VictoryMessage =>
             $"Congratulations! You won in {NumberOfMoves} moves";
 
+        // Методы для удаления и добавления рукояток
         private void ClearSafe()
         {
             safe.ClearHandles();
@@ -189,6 +198,8 @@ namespace PilotsBrothersSafe.Controls
         {
             ThrowIfGameNull();
 
+            // Если имеются заготовленные рукоятки в достаточном количестве, добавляем их
+            // А иначе создаем новые
             bool notEnoughPreparedHandles = preparedHandles.Count < m * n;
 
             int index = 0;
@@ -221,7 +232,7 @@ namespace PilotsBrothersSafe.Controls
             return handle;
         }
 
-
+        // Методы для обработки взаимодействия пользователя с рукоятками
         private void handle_Click(object sender, EventArgs e) =>
             ProcessInteraction((Handle)sender, Interaction.Move);
 
@@ -267,10 +278,12 @@ namespace PilotsBrothersSafe.Controls
             }
         }
 
+        // Ход игрока
         private void MakeMoveActions(int handleRow, int handleColumn)
         {
             ThrowIfGameNull();
 
+            // Чтобы подсказка обновилась, скрываем её и после хода вновь показываем
             if (IsSolutionShown) ResumeOrPauseSolutionShowing();
             game.Move(handleRow, handleColumn);
             if (IsSolutionShown) ResumeOrPauseSolutionShowing();
@@ -287,7 +300,7 @@ namespace PilotsBrothersSafe.Controls
             victoryTimer.Start();
         }
 
-
+        // Обработчики нажатий на кнопки интерфейса
         private void backToMenuButton_Click(object sender, EventArgs e)
         {
             DialogResult toMenuAskResult = gameForm.AskAttentionQuestion(
@@ -314,7 +327,7 @@ namespace PilotsBrothersSafe.Controls
                 State = BoardState.GameStarted;
         }
 
-
+        // Проверка, создан ли объект game, если нет - исключение
         private void ThrowIfGameNull() 
         {
             if (game == null)

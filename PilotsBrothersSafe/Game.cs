@@ -8,16 +8,17 @@ using PilotsBrothersSafe.GameRealizations;
 
 namespace PilotsBrothersSafe
 {
+    // Класс, который позволяет интерфейсу взаимодействовать с реализацией
     internal class Game
     {
         internal readonly int m, n;
         private readonly GameRealization gameRealization;
 
+        // Свойства, к которым обращается интерфейс
         internal List<int>[,] Moves { get; private set; }
         internal int NumberOfMoves { get; private set; } = 0;
         internal List<int>? Solution { get; private set; }
         internal bool[,] Configuration => gameRealization.Configuration;
-
         internal bool Victory => gameRealization.Victory;
 
         internal Game(int n) : this(n, n) { }
@@ -31,6 +32,8 @@ namespace PilotsBrothersSafe
             Moves = new List<int>[m, n];
             MakeMoves();
             
+            // Если поле слишком большое для представления в виде ulong-числа,
+            // то используется реализация с массивами
             gameRealization = m * n < 65 ? 
                 new GameRealizationBitwise(m, n) : 
                 new GameRealizationArrays(m, n);
@@ -38,6 +41,8 @@ namespace PilotsBrothersSafe
             PullSolution();
         }
 
+        // Методы, создающие массивы с номерами ячеек, которые надо изменить во время хода
+        // Это делается для скорости, чтобы ходы сразу были в удобочитаемом для интерфейса виде
         private void MakeMoves()
         {
             for (int rowIndex = 0; rowIndex < m; rowIndex++)
@@ -58,6 +63,7 @@ namespace PilotsBrothersSafe
             return move;
         }
 
+        // Ход игрока
         internal void Move(int rowIndex, int columnIndex)
         {
             NumberOfMoves++;
@@ -65,6 +71,8 @@ namespace PilotsBrothersSafe
             PullSolution();
         }
 
+        // Решение вытягивается из реализации после каждого хода, 
+        // и преобразуется в удобный для показа в интерфейсе формат
         private void PullSolution()
         {
             Solution = new();
