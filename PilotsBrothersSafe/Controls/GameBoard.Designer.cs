@@ -37,6 +37,9 @@
             this.helpButton = new PilotsBrothersSafe.Controls.HelpButton();
             this.numberOfMovesLabel = new System.Windows.Forms.Label();
             this.safe = new PilotsBrothersSafe.Controls.Safe();
+            this.gameBoardTable = new System.Windows.Forms.TableLayoutPanel();
+            this.gameControls = new System.Windows.Forms.TableLayoutPanel();
+            this.numberOfMovesLabel = new System.Windows.Forms.Label();
             this.gameBoardTable.SuspendLayout();
             this.gameControls.SuspendLayout();
             this.SuspendLayout();
@@ -85,7 +88,7 @@
             this.backToMenuButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.backToMenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backToMenuButton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.backToMenuButton.ForeColor = System.Drawing.Color.RoyalBlue;
+            //this.backToMenuButton.ForeColor = System.Drawing.Color.RoyalBlue;
             this.backToMenuButton.Location = new System.Drawing.Point(3, 3);
             this.backToMenuButton.Name = "backToMenuButton";
             this.backToMenuButton.Size = new System.Drawing.Size(122, 51);
@@ -100,7 +103,7 @@
             this.restartButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.restartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.restartButton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.restartButton.ForeColor = System.Drawing.Color.RoyalBlue;
+           // this.restartButton.ForeColor = System.Drawing.Color.RoyalBlue;
             this.restartButton.Location = new System.Drawing.Point(259, 3);
             this.restartButton.Name = "restartButton";
             this.restartButton.Size = new System.Drawing.Size(122, 51);
@@ -115,7 +118,7 @@
             this.solveButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.solveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.solveButton.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.solveButton.ForeColor = System.Drawing.Color.RoyalBlue;
+          //  this.solveButton.ForeColor = System.Drawing.Color.RoyalBlue;
             this.solveButton.Location = new System.Drawing.Point(131, 3);
             this.solveButton.Name = "solveButton";
             this.solveButton.Size = new System.Drawing.Size(122, 51);
@@ -130,7 +133,7 @@
             this.helpButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.helpButton.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.helpButton.ForeColor = System.Drawing.Color.RoyalBlue;
+           // this.helpButton.ForeColor = System.Drawing.Color.RoyalBlue;
             this.helpButton.Location = new System.Drawing.Point(387, 3);
             this.helpButton.Name = "helpButton";
             this.helpButton.Size = new System.Drawing.Size(122, 51);
@@ -143,7 +146,7 @@
             this.numberOfMovesLabel.AutoSize = true;
             this.numberOfMovesLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numberOfMovesLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numberOfMovesLabel.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.numberOfMovesLabel.ForeColor = System.Drawing.Color.SteelBlue;
             this.numberOfMovesLabel.Location = new System.Drawing.Point(3, 63);
             this.numberOfMovesLabel.Name = "numberOfMovesLabel";
             this.numberOfMovesLabel.Size = new System.Drawing.Size(512, 50);
@@ -154,7 +157,6 @@
             // safe
             // 
             this.safe.BackColor = System.Drawing.Color.Transparent;
-            this.safe.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("safe.BackgroundImage")));
             this.safe.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.safe.Dock = System.Windows.Forms.DockStyle.Fill;
             this.safe.Location = new System.Drawing.Point(3, 116);

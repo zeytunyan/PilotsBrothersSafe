@@ -53,7 +53,7 @@
             // 
             this.helpButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             resources.ApplyResources(this.helpButton, "helpButton");
-            this.helpButton.ForeColor = System.Drawing.Color.RoyalBlue;
+          //  this.helpButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.helpButton.Name = "helpButton";
             this.helpButton.UseVisualStyleBackColor = false;
             // 
@@ -61,7 +61,7 @@
             // 
             this.startButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             resources.ApplyResources(this.startButton, "startButton");
-            this.startButton.ForeColor = System.Drawing.Color.RoyalBlue;
+           // this.startButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.startButton.Name = "startButton";
             this.startButton.UseVisualStyleBackColor = false;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
@@ -70,7 +70,7 @@
             // 
             resources.ApplyResources(this.menuLabel, "menuLabel");
             this.mainMenu.SetColumnSpan(this.menuLabel, 3);
-            this.menuLabel.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.menuLabel.ForeColor = System.Drawing.Color.SteelBlue;
             this.menuLabel.Name = "menuLabel";
             // 
             // mainMenu
@@ -94,13 +94,13 @@
             // dimensionsLabel
             // 
             resources.ApplyResources(this.dimensionsLabel, "dimensionsLabel");
-            this.dimensionsLabel.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.dimensionsLabel.ForeColor = System.Drawing.Color.SteelBlue;
             this.dimensionsLabel.Name = "dimensionsLabel";
             // 
             // dimensionsNumericUpDown
             // 
             resources.ApplyResources(this.dimensionsNumericUpDown, "dimensionsNumericUpDown");
-            this.dimensionsNumericUpDown.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.dimensionsNumericUpDown.ForeColor = System.Drawing.Color.SteelBlue;
             this.dimensionsNumericUpDown.Maximum = new decimal(new int[] {
             10,
             0,

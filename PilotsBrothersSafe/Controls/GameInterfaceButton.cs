@@ -17,7 +17,7 @@ namespace PilotsBrothersSafe.Controls
         {
             InitializeComponent();
             BackColor = SystemColors.ButtonFace;
-            ForeColor = Color.RoyalBlue;
+            ForeColor = Color.SteelBlue;
             FlatStyle = FlatStyle.Flat;
             Dock = DockStyle.Fill;
             Font = new Font("Segoe UI", 20);

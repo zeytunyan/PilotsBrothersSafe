@@ -60,9 +60,9 @@ namespace PilotsBrothersSafe.Controls
                 BackColor = state switch
                 {
                     States.Default => Color.Transparent,
-                    States.PaintedOver => Color.FromArgb(76, 99, 107),
-                    States.Highlighted => Color.FromArgb(192, 255, 255),
-                    States.PaintedOverHighlighted => Color.Gray,
+                    States.PaintedOver => Color.FromArgb(55, 71, 79),
+                    States.Highlighted => Color.FromArgb(169, 169, 169),
+                    States.PaintedOverHighlighted => Color.FromArgb(83, 99, 107),
                     _ => throw new NotImplementedException("Недопустимое состояние")
                 };
             }
