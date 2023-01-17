@@ -1,14 +1,4 @@
 ﻿using PilotsBrothersSafe.Controls;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 
 namespace PilotsBrothersSafe
@@ -34,8 +24,7 @@ namespace PilotsBrothersSafe
         private void startButton_Click(object sender, EventArgs e)
         {
             int dimensionSize = Convert.ToInt32(dimensionsNumericUpDown.Value);
-            gameBoard.M = dimensionSize;
-            gameBoard.N = dimensionSize;
+            (gameBoard.M, gameBoard.N) = (dimensionSize, dimensionSize);
             gameBoard.State = GameBoard.BoardState.GameStarted;
             mainMenu.Hide();
             gameBoard.Show();

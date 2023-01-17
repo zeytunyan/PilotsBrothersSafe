@@ -62,7 +62,21 @@ namespace PilotsBrothersSafe.GameRealizations
             }
         }
 
-        private protected abstract bool TryAddMoveToSolution(int rowIndex, int columnIndex);
+        // Попытка добавить ход в решение
+        private protected bool TryAddMoveToSolution(int rowIndex, int columnIndex)
+        {
+            int rowSum = solutionRowSums[rowIndex];
+            int columnSum = solutionColumnSums[columnIndex];
+
+            // Ход добавляется в решение, только если данная строка
+            // и столбец заняты ходами менее, чем наполовину. 
+            bool canBeAdded = rowSum < nHalf && columnSum < mHalf;
+
+            if (canBeAdded)
+                MoveToSolution(rowIndex, columnIndex);
+
+            return canBeAdded;
+        }
 
         private protected abstract void MoveInConfiguration(int rowIndex, int columnIndex);
 
@@ -73,8 +87,17 @@ namespace PilotsBrothersSafe.GameRealizations
             ChangeSolution(rowIndex, columnIndex);
         }
 
-        private protected abstract void ChangeSolution(int rowIndex, int columnIndex);
 
+        private protected void ChangeSolution(int rowIndex, int columnIndex)
+        {
+            MoveToSolution(rowIndex, columnIndex);
+            OptimizeSolution(rowIndex, columnIndex);
+        }
+
+
+        private protected abstract void MoveToSolution(int rowIndex, int columnIndex);
+
+        private protected abstract void InvertSolutionRowOrColumn(int index, bool isColumn);
         // Алгоритм оптимизации подсказки
         private protected void OptimizeSolution(int rowIndex, int columnIndex)
         {
@@ -118,8 +141,18 @@ namespace PilotsBrothersSafe.GameRealizations
         private protected abstract void InvertSolution();
 
         // Строка или столбец решения инвертируются, если они более,
-        // чем наполовину, заняты сделанными ходами (инвертирование зависит от реализации)
-        private protected abstract bool TryInvertRowOrColumn(int index, bool isColumn = false);
+        // чем наполовину, заняты сделанными ходами.
+        private protected bool TryInvertRowOrColumn(int index, bool isColumn = false)
+        {
+            int maxSumValue = isColumn ? mHalf : nHalf;
+            int[] sumsArray = isColumn ? solutionColumnSums : solutionRowSums;
+            bool canBeInverted = sumsArray[index] > maxSumValue;
+
+            if (canBeInverted)
+                InvertSolutionRowOrColumn(index, isColumn);
+
+            return canBeInverted;
+        }
 
 
         // Методы для создания массива со случайно расположенными неповторяющимися числами

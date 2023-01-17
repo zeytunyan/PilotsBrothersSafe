@@ -100,34 +100,11 @@ namespace PilotsBrothersSafe.GameRealizations
             }
         }
 
-
-        // Попытка добавить ход в решение
-        private protected override bool TryAddMoveToSolution(int rowIndex, int columnIndex)
-        {
-            int rowSum = solutionRowSums[rowIndex];
-            int columnSum = solutionColumnSums[columnIndex];
-
-            // Ход добавляется в решение, только если данная строка
-            // и столбец заняты ходами менее, чем наполовину. 
-            bool canBeAdded = rowSum < nHalf && columnSum < mHalf;
-
-            if (canBeAdded)
-                MoveToSolution(rowIndex, columnIndex);
-
-            return canBeAdded;
-        }
-
         private protected override void MoveInConfiguration(int rowIndex, int columnIndex) => 
             configuration ^= moves[rowIndex, columnIndex];
 
-        private protected override void ChangeSolution(int rowIndex, int columnIndex)
-        {
-            MoveToSolution(rowIndex, columnIndex);
-            OptimizeSolution(rowIndex, columnIndex);
-        }
-
         // Ход в решении
-        private void MoveToSolution(int rowIndex, int columnIndex)
+        private protected override void MoveToSolution(int rowIndex, int columnIndex)
         {
             ulong moveToSolution = solutionMoves[rowIndex, columnIndex];
             solution ^= moveToSolution;
@@ -139,21 +116,8 @@ namespace PilotsBrothersSafe.GameRealizations
             totalSolutionSum += changeInSums;
         }
 
-        // Попытка инвертировать столбец или строку решения
-        private protected override bool TryInvertRowOrColumn(int index, bool isColumn = false)
-        {
-            int maxSumValue = isColumn ? mHalf : nHalf;
-            int[] sumsArray = isColumn ? solutionColumnSums : solutionRowSums;
-            bool canBeInverted = sumsArray[index] > maxSumValue;
-
-            if (canBeInverted)
-                InvertSolutionRowOrColumn(index, isColumn);
-
-            return canBeInverted;
-        }
-
         // Инвертирование какой-либо строки или столбца решения
-        private void InvertSolutionRowOrColumn(int index, bool isColumn)
+        private protected override void InvertSolutionRowOrColumn(int index, bool isColumn)
         {
             int[] sameDimensionSumArray = isColumn ? solutionColumnSums : solutionRowSums; ;
             ulong invertionRowOrColumn = isColumn ? columns[index] : rows[index];

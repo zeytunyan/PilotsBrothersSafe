@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Common;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using HandleSates = PilotsBrothersSafe.Controls.Handle.States;
+﻿using HandleSates = PilotsBrothersSafe.Controls.Handle.States;
 using Timer = System.Windows.Forms.Timer;
 
 namespace PilotsBrothersSafe.Controls
@@ -75,7 +64,7 @@ namespace PilotsBrothersSafe.Controls
             // После победы сейф открывается с задержкой,
             // чтобы пользователь успел увидеть, что все рукоятки параллельны
             victoryTimer.Interval = 750;
-            victoryTimer.Tick += victoryTimer_Tick; 
+            victoryTimer.Tick += victoryTimer_Tick!; 
         }
 
         private void victoryTimer_Tick(object sender, EventArgs e) =>
@@ -168,7 +157,7 @@ namespace PilotsBrothersSafe.Controls
         {
             ThrowIfGameNull();
 
-            foreach (int handleIndex in game.Solution)
+            foreach (int handleIndex in game!.Solution!)
                 safe[handleIndex].State ^= HandleSates.PaintedOver;
         }
 
@@ -203,7 +192,7 @@ namespace PilotsBrothersSafe.Controls
             bool notEnoughPreparedHandles = preparedHandles.Count < m * n;
 
             int index = 0;
-            foreach (bool position in game.Configuration)
+            foreach (bool position in game!.Configuration)
             {
                 if (notEnoughPreparedHandles)
                 {
@@ -226,9 +215,9 @@ namespace PilotsBrothersSafe.Controls
         private Handle CreateHandleWithEvents(bool isVerical = false)
         {
             Handle handle = new Handle(isVerical);
-            handle.Click += handle_Click;
-            handle.MouseEnter += handle_MouseEnter;
-            handle.MouseLeave += handle_MouseLeave;
+            handle.Click += handle_Click!;
+            handle.MouseEnter += handle_MouseEnter!;
+            handle.MouseLeave += handle_MouseLeave!;
             return handle;
         }
 
@@ -258,7 +247,7 @@ namespace PilotsBrothersSafe.Controls
         {
             ThrowIfGameNull();
 
-            foreach (int handleIndex in game.Moves[row, column])
+            foreach (int handleIndex in game!.Moves[row, column])
                 InteractWithHandle(safe[handleIndex], interaction);
         }
 
@@ -285,7 +274,7 @@ namespace PilotsBrothersSafe.Controls
 
             // Чтобы подсказка обновилась, скрываем её и после хода вновь показываем
             if (IsSolutionShown) ResumeOrPauseSolutionShowing();
-            game.Move(handleRow, handleColumn);
+            game!.Move(handleRow, handleColumn);
             if (IsSolutionShown) ResumeOrPauseSolutionShowing();
 
             numberOfMovesLabel.Text = OnGoingGameMessage;
@@ -303,7 +292,7 @@ namespace PilotsBrothersSafe.Controls
         // Обработчики нажатий на кнопки интерфейса
         private void backToMenuButton_Click(object sender, EventArgs e)
         {
-            DialogResult toMenuAskResult = gameForm.AskAttentionQuestion(
+            DialogResult toMenuAskResult = gameForm!.AskAttentionQuestion(
                 "go to the menu",
                 "Back to menu");
 
@@ -321,7 +310,7 @@ namespace PilotsBrothersSafe.Controls
         private void restartButton_Click(object sender, EventArgs e)
         {
             bool condition = State != BoardState.GameStarted ||
-                gameForm.AskAttentionQuestion("restart", "Restart") == DialogResult.Yes;
+                gameForm!.AskAttentionQuestion("restart", "Restart") == DialogResult.Yes;
 
             if (condition)
                 State = BoardState.GameStarted;

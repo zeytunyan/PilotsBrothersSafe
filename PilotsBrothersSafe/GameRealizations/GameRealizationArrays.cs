@@ -32,22 +32,6 @@ namespace PilotsBrothersSafe.GameRealizations
             MakeRandomConfiguration();
         }
 
-        // Попытка добавить ход в решение
-        private protected override bool TryAddMoveToSolution(int rowIndex, int columnIndex)
-        {
-            int rowSum = solutionRowSums[rowIndex];
-            int columnSum = solutionColumnSums[columnIndex];
-            
-            // Ход добавляется в решение, только если данная строка
-            // и столбец заняты ходами менее, чем наполовину. 
-            bool canBeAdded = rowSum < nHalf && columnSum < mHalf;
-
-            if (canBeAdded)
-                InvertArrayCell(rowIndex, columnIndex, solution);
-
-            return canBeAdded;
-        }
-
         private protected override void MoveInConfiguration(int rowIndex, int columnIndex)
         {
             InvertRowOrColumn(rowIndex, configuration);
@@ -55,24 +39,13 @@ namespace PilotsBrothersSafe.GameRealizations
             InvertArrayCell(rowIndex, columnIndex, configuration);
         }
 
-        private protected override void ChangeSolution(int rowIndex, int columnIndex)
-        {
+        // Ход в решении
+        private protected override void MoveToSolution(int rowIndex, int columnIndex) => 
             InvertArrayCell(rowIndex, columnIndex, solution);
-            OptimizeSolution(rowIndex, columnIndex);
-        }
 
-        // Попытка инвертировать столбец или строку решения
-        private protected override bool TryInvertRowOrColumn(int index, bool isColumn = false)
-        {
-            int maxSumValue = isColumn ? mHalf : nHalf;
-            int[] sumsArray = isColumn ? solutionColumnSums : solutionRowSums;
-            bool canBeInverted = sumsArray[index] > maxSumValue;
 
-            if (canBeInverted)
-                InvertRowOrColumn(index, solution, isColumn);
-
-            return canBeInverted;
-        }
+        private protected override void InvertSolutionRowOrColumn(int index, bool isColumn) =>
+            InvertRowOrColumn(index, solution, isColumn);
 
         // Инвертирование какой-либо строки или столбца
         private void InvertRowOrColumn(int index, bool[,] invertibleArray, bool isColumn = false)

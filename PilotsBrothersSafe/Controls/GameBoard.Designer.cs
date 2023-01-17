@@ -84,11 +84,11 @@
             // 
             // backToMenuButton
             // 
-            this.backToMenuButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+
             this.backToMenuButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.backToMenuButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backToMenuButton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            //this.backToMenuButton.ForeColor = System.Drawing.Color.RoyalBlue;
+
             this.backToMenuButton.Location = new System.Drawing.Point(3, 3);
             this.backToMenuButton.Name = "backToMenuButton";
             this.backToMenuButton.Size = new System.Drawing.Size(122, 51);
@@ -99,11 +99,11 @@
             // 
             // restartButton
             // 
-            this.restartButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+
             this.restartButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.restartButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.restartButton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-           // this.restartButton.ForeColor = System.Drawing.Color.RoyalBlue;
+
             this.restartButton.Location = new System.Drawing.Point(259, 3);
             this.restartButton.Name = "restartButton";
             this.restartButton.Size = new System.Drawing.Size(122, 51);
@@ -114,11 +114,11 @@
             // 
             // solveButton
             // 
-            this.solveButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+
             this.solveButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.solveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.solveButton.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-          //  this.solveButton.ForeColor = System.Drawing.Color.RoyalBlue;
+
             this.solveButton.Location = new System.Drawing.Point(131, 3);
             this.solveButton.Name = "solveButton";
             this.solveButton.Size = new System.Drawing.Size(122, 51);
@@ -129,11 +129,11 @@
             // 
             // helpButton
             // 
-            this.helpButton.BackColor = System.Drawing.SystemColors.ButtonFace;
+
             this.helpButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.helpButton.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-           // this.helpButton.ForeColor = System.Drawing.Color.RoyalBlue;
+
             this.helpButton.Location = new System.Drawing.Point(387, 3);
             this.helpButton.Name = "helpButton";
             this.helpButton.Size = new System.Drawing.Size(122, 51);
@@ -169,7 +169,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.gameBoardTable);
             this.DoubleBuffered = true;
             this.Name = "GameBoard";

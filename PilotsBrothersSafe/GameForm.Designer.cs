@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
+            this.menuLabel = new System.Windows.Forms.Label();
             this.gameBoard = new PilotsBrothersSafe.Controls.GameBoard();
             this.helpButton = new PilotsBrothersSafe.Controls.HelpButton();
             this.startButton = new PilotsBrothersSafe.Controls.GameInterfaceButton();
-            this.menuLabel = new System.Windows.Forms.Label();
+
             this.mainMenu = new System.Windows.Forms.TableLayoutPanel();
             this.dimensionsRow = new System.Windows.Forms.TableLayoutPanel();
             this.dimensionsLabel = new System.Windows.Forms.Label();
@@ -44,16 +45,15 @@
             // 
             // gameBoard
             // 
-            this.gameBoard.BackColor = System.Drawing.Color.AliceBlue;
+            //this.gameBoard.BackColor = System.Drawing.Color.AliceBlue;
             resources.ApplyResources(this.gameBoard, "gameBoard");
             this.gameBoard.Name = "gameBoard";
-            this.gameBoard.State = PilotsBrothersSafe.Controls.GameBoard.BoardState.Default;
             // 
             // helpButton
             // 
             this.helpButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             resources.ApplyResources(this.helpButton, "helpButton");
-          //  this.helpButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.helpButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.helpButton.Name = "helpButton";
             this.helpButton.UseVisualStyleBackColor = false;
             // 
@@ -61,7 +61,7 @@
             // 
             this.startButton.BackColor = System.Drawing.SystemColors.ButtonFace;
             resources.ApplyResources(this.startButton, "startButton");
-           // this.startButton.ForeColor = System.Drawing.Color.SteelBlue;
+            this.startButton.ForeColor = System.Drawing.Color.SteelBlue;
             this.startButton.Name = "startButton";
             this.startButton.UseVisualStyleBackColor = false;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
@@ -75,7 +75,7 @@
             // 
             // mainMenu
             // 
-            this.mainMenu.BackColor = System.Drawing.Color.AliceBlue;
+            //this.mainMenu.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(this.mainMenu, "mainMenu");
             this.mainMenu.Controls.Add(this.dimensionsRow, 1, 1);
             this.mainMenu.Controls.Add(this.menuLabel, 0, 1);
