@@ -18,7 +18,7 @@
 
 Сейф открывается, только если удается расположить все рукоятки параллельно друг другу (т.е. все вертикально или все горизонтально).
 
-![image](https://user-images.githubusercontent.com/47988040/212959352-34639d91-7a0d-4a01-8759-f4de1f73001d.png)
+![image](https://user-images.githubusercontent.com/47988040/212961597-89662fa0-dbb6-4f7a-8ff8-a78c772eb1bd.png)
 
 
 
